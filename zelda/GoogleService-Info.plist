@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>959632932831-n76khjl9r0gb1penul7l4obdoqtlouss.apps.googleusercontent.com</string>
+	<string>971944194065-k3rifo017tr9tjec4lso02hd4ckfpq81.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.959632932831-n76khjl9r0gb1penul7l4obdoqtlouss</string>
+	<string>com.googleusercontent.apps.971944194065-k3rifo017tr9tjec4lso02hd4ckfpq81</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCMVz_qgtcQTGbrPcrdLsKECSd0wSoT_p4</string>
+	<string>AIzaSyDjdhXYb1O9ATExagqpXL61Ec6mrFGaShM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>959632932831</string>
+	<string>971944194065</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>Aamer-Essa.zelda</string>
 	<key>PROJECT_ID</key>
-	<string>zelda-9911a</string>
+	<string>zelda-27c0d</string>
 	<key>STORAGE_BUCKET</key>
-	<string>zelda-9911a.appspot.com</string>
+	<string>zelda-27c0d.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:959632932831:ios:9d7e6caa9b647bdc5b4e6a</string>
+	<string>1:971944194065:ios:0cfe78bc71b04bbc5741b0</string>
 </dict>
 </plist>

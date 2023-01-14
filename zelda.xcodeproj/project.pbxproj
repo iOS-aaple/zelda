@@ -22,6 +22,8 @@
 		3F3A76E22972EB89002E0BB1 /* FacebookGamingServices in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3A76E12972EB89002E0BB1 /* FacebookGamingServices */; };
 		3F3A76E42972EB89002E0BB1 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3A76E32972EB89002E0BB1 /* FacebookLogin */; };
 		3F3A76E62972EB89002E0BB1 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3A76E52972EB89002E0BB1 /* FacebookShare */; };
+		3F3A76ED29730047002E0BB1 /* FrindsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A76EC29730047002E0BB1 /* FrindsView.swift */; };
+		3F3A76EF29730054002E0BB1 /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A76EE29730054002E0BB1 /* ChatsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		3F3A76BB2972E55E002E0BB1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F3A76BE2972E55E002E0BB1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3F3A76C52972E729002E0BB1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3F3A76EC29730047002E0BB1 /* FrindsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrindsView.swift; sourceTree = "<group>"; };
+		3F3A76EE29730054002E0BB1 /* ChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,8 +77,9 @@
 		3F3A76B62972E55D002E0BB1 /* zelda */ = {
 			isa = PBXGroup;
 			children = (
+				3F3A76EA29730021002E0BB1 /* Data */,
+				3F3A76E929730011002E0BB1 /* View */,
 				3F3A76B72972E55D002E0BB1 /* zeldaApp.swift */,
-				3F3A76B92972E55D002E0BB1 /* ContentView.swift */,
 				3F3A76C52972E729002E0BB1 /* GoogleService-Info.plist */,
 				3F3A76BB2972E55E002E0BB1 /* Assets.xcassets */,
 				3F3A76BD2972E55E002E0BB1 /* Preview Content */,
@@ -88,6 +93,31 @@
 				3F3A76BE2972E55E002E0BB1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3F3A76E929730011002E0BB1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3F3A76B92972E55D002E0BB1 /* ContentView.swift */,
+				3F3A76EB2973002E002E0BB1 /* FrindsView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3F3A76EA29730021002E0BB1 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		3F3A76EB2973002E002E0BB1 /* FrindsView */ = {
+			isa = PBXGroup;
+			children = (
+				3F3A76EC29730047002E0BB1 /* FrindsView.swift */,
+				3F3A76EE29730054002E0BB1 /* ChatsView.swift */,
+			);
+			path = FrindsView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +208,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F3A76EF29730054002E0BB1 /* ChatsView.swift in Sources */,
+				3F3A76ED29730047002E0BB1 /* FrindsView.swift in Sources */,
 				3F3A76BA2972E55D002E0BB1 /* ContentView.swift in Sources */,
 				3F3A76B82972E55D002E0BB1 /* zeldaApp.swift in Sources */,
 			);

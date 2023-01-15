@@ -9,7 +9,7 @@ import SwiftUI
 
 
 
-struct ContentView: View {
+struct login_signupView: View {
     var body: some View {
         
         Home()
@@ -17,7 +17,7 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct login_signupView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }

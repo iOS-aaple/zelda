@@ -23,6 +23,7 @@
 		3F3A76E62972EB89002E0BB1 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3A76E52972EB89002E0BB1 /* FacebookShare */; };
 		3F3A76ED29730047002E0BB1 /* FrindsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A76EC29730047002E0BB1 /* FrindsView.swift */; };
 		3F3A76EF29730054002E0BB1 /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A76EE29730054002E0BB1 /* ChatsView.swift */; };
+		3FE963EB2974570A00E3E1CD /* login&signupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE963EA2974570A00E3E1CD /* login&signupView.swift */; };
 		AF0DCE282973271B00186556 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0DCE272973271B00186556 /* HomeView.swift */; };
 		AF0DCE2A2973272F00186556 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0DCE292973272F00186556 /* StoreView.swift */; };
 		AF0DCE2C29733A9800186556 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF0DCE2B29733A9800186556 /* GoogleService-Info.plist */; };
@@ -37,6 +38,7 @@
 		3F3A76BE2972E55E002E0BB1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3F3A76EC29730047002E0BB1 /* FrindsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrindsView.swift; sourceTree = "<group>"; };
 		3F3A76EE29730054002E0BB1 /* ChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsView.swift; sourceTree = "<group>"; };
+		3FE963EA2974570A00E3E1CD /* login&signupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "login&signupView.swift"; sourceTree = "<group>"; };
 		AF0DCE272973271B00186556 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = SOURCE_ROOT; };
 		AF0DCE292973272F00186556 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		AF0DCE2B29733A9800186556 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				3F3A76EC29730047002E0BB1 /* FrindsView.swift */,
+				3FE963EA2974570A00E3E1CD /* login&signupView.swift */,
 				3F3A76EE29730054002E0BB1 /* ChatsView.swift */,
 				E44717EF2973F29F00EA5834 /* AccountView.swift */,
 			);
@@ -218,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F3A76EF29730054002E0BB1 /* ChatsView.swift in Sources */,
+				3FE963EB2974570A00E3E1CD /* login&signupView.swift in Sources */,
 				3F3A76ED29730047002E0BB1 /* FrindsView.swift in Sources */,
 				3F3A76BA2972E55D002E0BB1 /* ContentView.swift in Sources */,
 				AF0DCE282973271B00186556 /* HomeView.swift in Sources */,

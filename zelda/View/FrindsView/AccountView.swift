@@ -57,7 +57,7 @@ struct infoView : View {
             HStack(alignment: .center){
             Text("\(playerName) Ahmad's Account ")
             .font(.system(size: 30))
-            .fontDesign(.serif)
+            //.fontDesign(.serif)
             .foregroundColor(Color.white)
             }
             .padding(20)

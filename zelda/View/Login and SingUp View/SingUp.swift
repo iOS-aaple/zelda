@@ -165,9 +165,9 @@ struct SignUP : View {
                 
                 
                 
-                .alert(isPresented: $showErrorMessage) {
-                           Alert(title: Text("Important message"), message: Text("Wear sunscreen"), dismissButton: .default(Text("Got it!")))
-                       }
+//                .alert(isPresented: $showErrorMessage) {
+//                           Alert(title: Text("Important message"), message: Text("Wear sunscreen"), dismissButton: .default(Text("Got it!")))
+//                       }
                 
             } else {
                 

@@ -6,7 +6,9 @@
 //
 
 import SwiftUI
-
+import FirebaseAuth
+import FirebaseDatabase
+import Firebase
 struct Login : View {
     
     @State var email = ""
@@ -72,7 +74,7 @@ struct Login : View {
                     Spacer(minLength: 0)
                     
                     Button(action: {
-
+                        login(email: self.email, passowrd: self.pass)
                     }) {
 
                         Text("Forget Password?")
@@ -119,6 +121,19 @@ struct Login : View {
         }
         
     }
+    func login(email:String,passowrd:String){
         
+        Auth.auth().signIn(withEmail: email, password: passowrd) { authorized , err in
+            
+            if err != nil {
+                print("🔴")
+                print("\(err!.localizedDescription)")
+            } else{
+                print("🟢")
+                print("loged in")
+               
+            }
+        }
+    }
 }
 

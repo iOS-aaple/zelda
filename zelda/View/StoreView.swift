@@ -9,7 +9,14 @@ import SwiftUI
 
 struct StoreView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView{
+            Characters()
+                .navigationBarTitle("", displayMode: .inline)
+                .navigationBarHidden(true)
+                .navigationBarBackButtonHidden(true)
+        }
+        
+        
     }
 }
 
@@ -18,3 +25,220 @@ struct StoreView_Previews: PreviewProvider {
         StoreView()
     }
 }
+struct Characters : View {
+    var body: some View {
+//        NavigationView {
+            GeometryReader { geometry in
+                ZStack {
+                    Image("background")
+                        .resizable()
+                        .aspectRatio(geometry.size, contentMode: .fill)
+                        .edgesIgnoringSafeArea(.all)
+                    VStack {
+                        HStack {
+                            Text("Your Player")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                            
+                            Spacer()
+                            Button(action: { }, label: {
+                                Image(systemName: "line.horizontal.3.decrease")
+                                    .font(.title)
+                                    .foregroundColor(.white)
+                            })
+                        }
+                        .padding(.horizontal)
+                        .padding(.top)
+                        ScrollView(.vertical, showsIndicators: false){
+                            VStack(spacing: 10) {
+                                ForEach(data){ i in
+                                    Card(data: i)
+                                }
+                            }
+                            .padding(.bottom)
+                        }
+                      
+                    }
+                    .edgesIgnoringSafeArea(.bottom)
+    //                .background(LinearGradient(gradient: .init(colors: [Color(.black),Color(.white)]), startPoint: .top, endPoint: .bottom))
+                }
+            }
+//        }
+    }
+}
+struct Card : View {
+    var data : Player
+    var body: some View {
+        HStack {
+            Image(self.data.image)
+                .resizable()
+            .frame(width: UIScreen.main.bounds.width / 1.8)
+            Spacer()
+            VStack(spacing: 20) {
+                Spacer(minLength: 0)
+                Image(systemName: "bolt.fill")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(
+                        ZStack {
+                            self.data.color
+                            Circle()
+                                .stroke(Color.black.opacity(0.1), lineWidth: 5)
+                            Circle()
+                                .trim(from: 0, to: self.data.power[1])
+                                .stroke(Color.white, lineWidth: 5)
+                        }
+                            .rotationEffect(.init(degrees: -90))
+                    )
+                    .clipShape(Circle())
+                Image(systemName: "suit.heart.fill")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(
+                        ZStack {
+                            self.data.color
+                            Circle()
+                                .stroke(Color.black.opacity(0.1), lineWidth: 5)
+                            Circle()
+                                .trim(from: 0, to: self.data.power[2])
+                                .stroke(Color.white, lineWidth: 5)
+                        }
+                    )
+                    .clipShape(Circle())
+                Image(systemName: "hammer.fill")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(
+                        ZStack {
+                            self.data.color
+                            Circle()
+                                .stroke(Color.black.opacity(0.1), lineWidth: 5)
+                            Circle()
+                                .trim(from: 0, to: self.data.power[2])
+                                .stroke(Color.white, lineWidth: 5)
+                        }
+                    )
+                    .clipShape(Circle())
+                Spacer(minLength: 0)
+                NavigationLink(destination: Detail(data: self.data)) {
+                    Text("See Details")
+                        .font(.caption)
+                        .foregroundColor(.white)
+                        .padding(.vertical, 12)
+                        .padding(.horizontal, 25)
+                        .background(Capsule().stroke(Color.white, lineWidth: 2))
+                        
+                }
+                .offset(y: -30)
+            }
+            .padding(.trailing)
+        }
+        .frame(height: 290)
+        .background(
+            Color.white.opacity(0.2)
+                .cornerRadius(25)
+            
+                .rotation3DEffect(.init(degrees: 20), axis : (x:0, y: -1, z: 0))
+            // trim view
+                .padding(.vertical, 35)
+                .padding(.trailing, 25)
+        )
+        .padding(.horizontal)
+    }
+}
+
+struct Detail : View {
+    var data : Player
+    // used to pop the top most view on stack
+    @Environment(\.presentationMode) var present
+    var body: some View {
+        GeometryReader { g in
+            ZStack {
+                Image("background")
+                    .resizable()
+                    .aspectRatio(g.size, contentMode: .fill)
+                    .edgesIgnoringSafeArea(.all)
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarTitle("", displayMode: .inline)
+                    .navigationBarHidden(true)
+                VStack {
+                    ZStack {
+                        HStack {
+                            Button(action : {
+                                // pop the view when back button pressed
+                                self.present.wrappedValue.dismiss()
+                            }) {
+                                Image(systemName: "chevron.left")
+                                    .font(.title)
+                                    .foregroundColor(.white)
+                            }
+                            Spacer()
+                            Button(action : {
+                                
+                            }) {
+                                Image(systemName: "circle.grid.2x2.fill")
+                                    .font(.title)
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        Text("Overview")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                    }
+                    .padding()
+                    Image(self.data.image)
+                        .resizable()
+                        .frame(width: UIScreen.main.bounds.width - 50, height: UIScreen.main.bounds.height / 2 )
+                        .background(Color.white.opacity(0.2))
+                        .cornerRadius(30)
+                    Text(self.data.name)
+                        .fontWeight(.bold)
+                        .font(.system(size: 55))
+                        .foregroundColor(.white)
+                        .padding(.top)
+                    Text("Description")
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
+                        .padding(.top)
+                    HStack(spacing : 20){
+                        Button(action : {
+                            
+                        }) {
+                            Text("Add to Favourite")
+                                .foregroundColor(.white)
+                                .padding(.vertical)
+                                .frame(width: (UIScreen.main.bounds.width / 2) - 30)
+                                .background(Capsule().stroke(Color.white, lineWidth: 2))
+                        }
+                        Button(action : {
+                            
+                        }) {
+                            Text("Play now")
+                                .foregroundColor(.white)
+                                .padding(.vertical)
+                                .frame(width: (UIScreen.main.bounds.width / 2) - 30)
+                                .background(Capsule().stroke(Color.white, lineWidth: 2))
+                        }
+                    }
+                    .padding(.top, 30)
+                    Spacer()
+                    
+                }
+                
+            }
+        }
+    }
+}
+struct Player : Identifiable {
+    let id : Int
+    let power : [CGFloat]
+    let image : String
+    let name : String
+    let color : Color
+}
+var data = [Player(id: 0, power: [0.2,0.5,0.9], image: "1", name: "Sherman", color: .gray),
+            Player(id: 1, power: [0.3,0.5,0.6], image: "naruto", name: "Naruto", color: .gray)
+]
+

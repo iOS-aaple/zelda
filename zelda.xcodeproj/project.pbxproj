@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F0D6B8C2974761400F6B9A0 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D6B8B2974761400F6B9A0 /* Messages.swift */; };
+		3F0D6B8F2974767000F6B9A0 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D6B8E2974767000F6B9A0 /* Cell.swift */; };
+		3F0D6B91297476A600F6B9A0 /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D6B90297476A600F6B9A0 /* Title.swift */; };
 		3F3A76B82972E55D002E0BB1 /* zeldaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A76B72972E55D002E0BB1 /* zeldaApp.swift */; };
 		3F3A76BA2972E55D002E0BB1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A76B92972E55D002E0BB1 /* ContentView.swift */; };
 		3F3A76BC2972E55E002E0BB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F3A76BB2972E55E002E0BB1 /* Assets.xcassets */; };
@@ -31,6 +34,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F0D6B8B2974761400F6B9A0 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		3F0D6B8E2974767000F6B9A0 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		3F0D6B90297476A600F6B9A0 /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
 		3F3A76B42972E55D002E0BB1 /* zelda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zelda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3A76B72972E55D002E0BB1 /* zeldaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zeldaApp.swift; sourceTree = "<group>"; };
 		3F3A76B92972E55D002E0BB1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -66,6 +72,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F0D6B8D2974765E00F6B9A0 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				3F0D6B90297476A600F6B9A0 /* Title.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		3F3A76AB2972E55D002E0BB1 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +124,7 @@
 				AF0DCE292973272F00186556 /* StoreView.swift */,
 				3F3A76B92972E55D002E0BB1 /* ContentView.swift */,
 				3F3A76EB2973002E002E0BB1 /* FrindsView */,
+				3F0D6B8B2974761400F6B9A0 /* Messages.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -124,7 +139,9 @@
 		3F3A76EB2973002E002E0BB1 /* FrindsView */ = {
 			isa = PBXGroup;
 			children = (
+				3F0D6B8D2974765E00F6B9A0 /* Chat */,
 				3F3A76EC29730047002E0BB1 /* FrindsView.swift */,
+				3F0D6B8E2974767000F6B9A0 /* Cell.swift */,
 				3FE963EA2974570A00E3E1CD /* login&signupView.swift */,
 				3F3A76EE29730054002E0BB1 /* ChatsView.swift */,
 				E44717EF2973F29F00EA5834 /* AccountView.swift */,
@@ -223,9 +240,12 @@
 				3F3A76EF29730054002E0BB1 /* ChatsView.swift in Sources */,
 				3FE963EB2974570A00E3E1CD /* login&signupView.swift in Sources */,
 				3F3A76ED29730047002E0BB1 /* FrindsView.swift in Sources */,
+				3F0D6B91297476A600F6B9A0 /* Title.swift in Sources */,
 				3F3A76BA2972E55D002E0BB1 /* ContentView.swift in Sources */,
 				AF0DCE282973271B00186556 /* HomeView.swift in Sources */,
 				E44717F02973F29F00EA5834 /* AccountView.swift in Sources */,
+				3F0D6B8C2974761400F6B9A0 /* Messages.swift in Sources */,
+				3F0D6B8F2974767000F6B9A0 /* Cell.swift in Sources */,
 				AF0DCE2A2973272F00186556 /* StoreView.swift in Sources */,
 				3F3A76B82972E55D002E0BB1 /* zeldaApp.swift in Sources */,
 			);

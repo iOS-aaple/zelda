@@ -95,7 +95,7 @@ struct Login_signupHomeView : View {
 }
 
 
-struct CShape : Shape {
+struct CShapeLogin : Shape {
     
     func path(in rect: CGRect) -> Path {
         

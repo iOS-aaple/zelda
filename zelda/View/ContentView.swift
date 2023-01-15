@@ -6,10 +6,24 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import Firebase
 
 struct ContentView: View {
+    @State var showHomeView = false
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+       Login_signupView()
+            .onAppear{
+                Auth.auth().addStateDidChangeListener { auth, user in
+                    if user != nil {
+                        showHomeView = true
+                    }
+                }
+            }
+            .fullScreenCover(isPresented: $showHomeView) {
+                HomeView()
+            }
+        
     }
 }
 
@@ -18,3 +32,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+

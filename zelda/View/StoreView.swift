@@ -49,7 +49,7 @@ struct Characters : View {
                                     .foregroundColor(.white)
                                     .frame(width: 60, height: 40)
                             })
-                        }
+                        } // head bar
                         .padding(.horizontal)
                         .padding(.top)
                         ScrollView(.vertical, showsIndicators: false){
@@ -59,7 +59,7 @@ struct Characters : View {
                                 }
                             }
                             .padding(.bottom)
-                        }
+                        } // show cards
                       
                     }
                     .edgesIgnoringSafeArea(.bottom)

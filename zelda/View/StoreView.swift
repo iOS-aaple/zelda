@@ -36,16 +36,18 @@ struct Characters : View {
                         .edgesIgnoringSafeArea(.all)
                     VStack {
                         HStack {
-                            Text("Your Player")
+                            Text("Zelda Store")
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
                             
                             Spacer()
                             Button(action: { }, label: {
-                                Image(systemName: "line.horizontal.3.decrease")
+                                Image("shop")
+                                    .resizable()
                                     .font(.title)
                                     .foregroundColor(.white)
+                                    .frame(width: 60, height: 40)
                             })
                         }
                         .padding(.horizontal)
@@ -61,7 +63,6 @@ struct Characters : View {
                       
                     }
                     .edgesIgnoringSafeArea(.bottom)
-    //                .background(LinearGradient(gradient: .init(colors: [Color(.black),Color(.white)]), startPoint: .top, endPoint: .bottom))
                 }
             }
 //        }
@@ -106,7 +107,7 @@ struct Card : View {
                         }
                     )
                     .clipShape(Circle())
-                Image(systemName: "hammer.fill")
+                Image(systemName: "brain")
                     .foregroundColor(.white)
                     .padding()
                     .background(
@@ -149,6 +150,7 @@ struct Card : View {
 }
 
 struct Detail : View {
+    @State private var presentAlert = false
     var data : Player
     // used to pop the top most view on stack
     @Environment(\.presentationMode) var present
@@ -177,9 +179,11 @@ struct Detail : View {
                             Button(action : {
                                 
                             }) {
-                                Image(systemName: "circle.grid.2x2.fill")
+                                Image("shop")
+                                    .resizable()
                                     .font(.title)
                                     .foregroundColor(.white)
+                                    .frame(width: 60, height: 40)
                             }
                         }
                         Text("Overview")
@@ -203,23 +207,33 @@ struct Detail : View {
                         .foregroundColor(.white)
                         .padding(.top)
                     HStack(spacing : 20){
+//                        Button(action : {
+//
+//                        }) {
+//                            Text("Add to Favourite")
+//                                .foregroundColor(.white)
+//                                .padding(.vertical)
+//                                .frame(width: (UIScreen.main.bounds.width / 2) - 30)
+//                                .background(Capsule().stroke(Color.white, lineWidth: 2))
+//                        }
                         Button(action : {
-                            
+                            presentAlert = true
+
                         }) {
-                            Text("Add to Favourite")
+                            Text("Buy")
                                 .foregroundColor(.white)
                                 .padding(.vertical)
                                 .frame(width: (UIScreen.main.bounds.width / 2) - 30)
                                 .background(Capsule().stroke(Color.white, lineWidth: 2))
-                        }
-                        Button(action : {
-                            
-                        }) {
-                            Text("Play now")
-                                .foregroundColor(.white)
-                                .padding(.vertical)
-                                .frame(width: (UIScreen.main.bounds.width / 2) - 30)
-                                .background(Capsule().stroke(Color.white, lineWidth: 2))
+                                .alert("are you sure to buy \(self.data.name)?", isPresented: $presentAlert, actions: {
+                                    // 1
+                                    Button("buy", role: .cancel, action: {})
+                                      Button("Cancel", role: .destructive, action: {})
+
+                                    }, message: {
+                                      Text("")
+                                    })
+                                
                         }
                     }
                     .padding(.top, 30)
@@ -238,7 +252,8 @@ struct Player : Identifiable {
     let name : String
     let color : Color
 }
-var data = [Player(id: 0, power: [0.2,0.5,0.9], image: "1", name: "Sherman", color: .gray),
-            Player(id: 1, power: [0.3,0.5,0.6], image: "naruto", name: "Naruto", color: .gray)
+var data = [Player(id: 0, power: [0.2,0.5,0.9], image: "1", name: "Sherman", color: .clear),
+            Player(id: 1, power: [0.3,0.5,0.6], image: "luca", name: "Luca", color: .clear),
+            Player(id: 2, power: [0.3,0.5,0.6], image: "marty", name: "Marty", color: .clear)
 ]
 

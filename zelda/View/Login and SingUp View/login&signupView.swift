@@ -97,6 +97,7 @@ struct Login_signupHomeView : View {
             .offset(y: 60)
         }
     }
+    
     func loginUsingGoogle(){
         
            guard let clientID = FirebaseApp.app()?.options.clientID else { return }
@@ -110,81 +111,34 @@ struct Login_signupHomeView : View {
            GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { signInResult , err in
                       
                       if err != nil {
-                          
-       //                       showErrorMessage = true
-       //                       errorMessage = "\(err!.localizedDescription)"
+                
                          print("\(err!.localizedDescription)")
+                          
                       } else {
-                          
-                          
-                  
                           self.sendData(signInResult: signInResult!)
-                          
                       }
                   }
-       }
+    }// loginUsingGoogle
     
     func sendData(signInResult:GIDSignInResult) {
         
         let signInResult = signInResult.user
+        
             // set the data from the google
-            var userID = String()
+           
             let userName = "\(signInResult.profile!.givenName!) \(signInResult.profile!.familyName!)"
+        
             let userEmail = "\(signInResult.profile!.email)"
             let userPassword = ""
-            let userImageProfile = "\(signInResult.profile!.imageURL(withDimension: 300)!)"
+            
         
-            
-            
-            // generate id for the user
-            
-            for chart in userEmail {
-                if chart != "." {
-                    
-                    if chart != "@" {
-                        let indexItem = userID.index(userID.endIndex, offsetBy: 0)
-                        userID.insert(chart, at: indexItem)
-                    }
-                    
-                }
-            }
-            
-        let path = "profileImages/go\(userID).png"
-            
-            // save profile image to the storage
-            
-            if let  imageURL = URL(string: userImageProfile) {
-                
-                URLSession.shared.dataTask(with: imageURL) { data, response, error in
-                    
-                    // upload image to storage
-                    DispatchQueue.main.async {
-                        
-                        let storageRef : StorageReference!
-                            storageRef = Storage.storage().reference().child(path)
-                            storageRef.putData(data!)
-                        
-                    }
-                }.resume()
-            } // end of imageURL
-            
-            
-            // save user information to the database
-//        let user = User(id: userID, name: userName,email: userEmail, password: userPassword, profileImage: path,jewelry:100)
-//
-//            var dbRef : DatabaseReference!
-//                dbRef = Database.database().reference().child("Users").child("\(userID)")
-//                dbRef.setValue(["fullName":user.name,"email":user.email,"password":user.password,"profileImage":user.profileImage])
-            
-           
-            
-            // navigate to home
-            
         guard let idToken = signInResult.idToken else { return }
     
         let accessToken = signInResult.accessToken
         
         let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
+        
+        // login
         
         Auth.auth().signIn(with: credential) { authResult, error in
                
@@ -192,19 +146,16 @@ struct Login_signupHomeView : View {
                 print("\(error!.localizedDescription)")
             } else {
                 
-                let user = User(id: authResult!.user.uid, name: userName,email: userEmail, password: userPassword, profileImage: path,jewelry:100)
+                let user = User(id: authResult!.user.uid, name: userName,email: userEmail, password: userPassword, profileImage: "1",jewelry:100)
                     
                     var dbRef : DatabaseReference!
                         dbRef = Database.database().reference().child("Users").child("\(authResult!.user.uid)")
                         dbRef.setValue(["fullName":user.name,"email":user.email,"password":user.password,"profileImage":user.profileImage])
                 
-            }
-        }
-        
-           
-        }
-    
-
+                    }
+                }//end Auth
+            
+            }// send sendData
     
 }
 
@@ -238,239 +189,7 @@ struct CShape1 : Shape {
     }
 }
 
-//struct Login : View {
-//    
-//    @State var email = ""
-//    @State var pass = ""
-//    @Binding var index : Int
-//    
-//    var body: some View{
-//        
-//        ZStack(alignment: .bottom) {
-//            
-//            VStack{
-//                
-//                HStack{
-//                    
-//                    VStack(spacing: 10){
-//                        
-//                        Text("Login")
-//                            .foregroundColor(self.index == 0 ? .white : .gray)
-//                            .font(.title)
-//                            .fontWeight(.bold)
-//                        
-//                        Capsule()
-//                            .fill(self.index == 0 ? Color.blue : Color.clear)
-//                            .frame(width: 100, height: 5)
-//                    }
-//                    
-//                    Spacer(minLength: 0)
-//                }
-//                .padding(.top, 30)
-//                
-//                VStack{
-//                    
-//                    HStack(spacing: 15){
-//                        
-//                        Image(systemName: "envelope.fill")
-//                            .foregroundColor(Color("Color4"))
-//                        
-//                        TextField("Email Address", text: self.$email)
-//                    }
-//                    
-//                    Divider().background(Color.white.opacity(0.5))
-//                }
-//                .padding(.horizontal)
-//                .padding(.top, 40)
-//                
-//                VStack{
-//                    
-//                    HStack(spacing: 15){
-//                        
-//                        Image(systemName: "eye.slash.fill")
-//                            .foregroundColor(Color("Color4"))
-//                        
-//                        SecureField("Password", text: self.$pass)
-//                    }
-//                    
-//                    Divider().background(Color.white.opacity(0.5))
-//                }
-//                .padding(.horizontal)
-//                .padding(.top, 30)
-//                
-//                HStack{
-//                    
-//                    Spacer(minLength: 0)
-//                    
-//                    Button(action: {
-//
-//                    }) {
-//
-//                        Text("Forget Password?")
-//                            .foregroundColor(Color.white.opacity(1))
-//
-//
-//
-//                    }
-//                    
-//                }
-//                .padding(.horizontal)
-//                .padding(.top, 30)
-//            }
-//            .padding()
-//            .padding(.bottom, 65)
-//            .background(Color("Color2"))
-//            .clipShape(CShape())
-//            .contentShape(CShape())
-//            .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: -5)
-//            .onTapGesture {
-//                
-//                self.index = 0
-//                
-//            }
-//            .cornerRadius(35)
-//            .padding(.horizontal,20)
-//            
-//            
-//            Button(action: {
-//                
-//            }) {
-//                
-//                Text("LOGIN")
-//                    .foregroundColor(.white)
-//                    .fontWeight(.bold)
-//                    .padding(.vertical)
-//                    .padding(.horizontal, 50)
-//                    .background(Color("Color3"))
-//                    .clipShape(Capsule())
-//                    .shadow(color: Color.white.opacity(0.1), radius: 5, x: 0, y: 5)
-//            }
-//            .offset(y: 25)
-//            .opacity(self.index == 0 ? 1 : 0)
-//        }
-//        
-//    }
-//        
-//}
 
-// SignUP Page
-
-//struct SignUP : View {
-//
-//    @State var email = ""
-//    @State var pass = ""
-//    @State var Repass = ""
-//    @Binding var index : Int
-//
-//    var body: some View{
-//
-//        ZStack(alignment: .bottom) {
-//
-//            VStack{
-//
-//                HStack{
-//
-//                    Spacer(minLength: 0)
-//
-//                    VStack(spacing: 10){
-//
-//                        Text("SignUp")
-//                            .foregroundColor(self.index == 1 ? .white : .gray)
-//                            .font(.title)
-//                            .fontWeight(.bold)
-//
-//                        Capsule()
-//                            .fill(self.index == 1 ? Color.blue : Color.clear)
-//                            .frame(width: 100, height: 5)
-//                    }
-//                }
-//                .padding(.top, 30)
-//
-//                VStack{
-//
-//                    HStack(spacing: 15){
-//
-//                        Image(systemName: "envelope.fill")
-//                            .foregroundColor(Color("Color4"))
-//
-//                        TextField("Email Address", text: self.$email)
-//                    }
-//
-//                    Divider().background(Color.white.opacity(0.5))
-//                }
-//                .padding(.horizontal)
-//                .padding(.top, 40)
-//
-//                VStack{
-//
-//                    HStack(spacing: 15){
-//
-//                        Image(systemName: "eye.slash.fill")
-//                            .foregroundColor(Color("Color4"))
-//
-//                        SecureField("Password", text: self.$pass)
-//                    }
-//
-//                    Divider().background(Color.white.opacity(0.5))
-//                }
-//                .padding(.horizontal)
-//                .padding(.top, 30)
-//
-//
-//
-//                VStack{
-//
-//                    HStack(spacing: 15){
-//
-//                        Image(systemName: "eye.slash.fill")
-//                            .foregroundColor(Color("Color4"))
-//
-//                        SecureField("Password", text: self.$Repass)
-//                    }
-//
-//                    Divider().background(Color.white.opacity(0.5))
-//                }
-//                .padding(.horizontal)
-//                .padding(.top, 30)
-//            }
-//            .padding()
-//            .padding(.bottom, 65)
-//            .background(Color("Color2"))
-//            .clipShape(CShape1())
-//            .contentShape(CShape1())
-//            .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: -5)
-//            .onTapGesture {
-//
-//                self.index = 1
-//
-//            }
-//            .cornerRadius(35)
-//            .padding(.horizontal,20)
-//
-//            // Button
-//
-//            Button(action: {
-//
-//            }) {
-//
-//                Text("SIGNUP")
-//                    .foregroundColor(.white)
-//                    .fontWeight(.bold)
-//                    .padding(.vertical)
-//                    .padding(.horizontal, 50)
-//                    .background(Color("Color3"))
-//                    .clipShape(Capsule())
-//                    .shadow(color: Color.white.opacity(0.1), radius: 5, x: 0, y: 5)
-//            }
-//            .offset(y: 25)
-//
-//            .opacity(self.index == 1 ? 1 : 0)
-//        }
-//     //    .offset(y: 50)
-//    }
-    
-        
-//}
 
 var images : [UIImage]! = [
     UIImage(named: "image0")!,

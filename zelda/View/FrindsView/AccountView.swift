@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import Firebase
+import FirebaseDatabase
 
 struct AccountView: View {
     @State var playerName = ""
@@ -15,8 +18,15 @@ struct AccountView: View {
     @State var editingToggle = false
     @State var playerBirthDate = Date.now
     @State var playerCoins = ""
+    @State var userID = "\(Auth.auth().currentUser!.uid)"
+    @State var userInfo = NSDictionary()
     
+    
+    init() {
+        getUserInfo(userID: userID)
+    }
     var body: some View {
+        
         GeometryReader{
             geometry in
             ZStack{
@@ -25,11 +35,38 @@ struct AccountView: View {
                     .aspectRatio(geometry.size, contentMode: .fill)
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-                    infoView(playerName: $playerName, playerEmail: $playerEmail , playerPassword:  $playerPassword , isEditingeOn: $editingToggle, playerBirthDate: $playerBirthDate, playerCoins: $playerCoins)
+                    infoView(playerName: $playerName, playerEmail: $playerEmail , playerPassword:  $playerPassword , isEditingeOn: $editingToggle, playerBirthDate: $playerBirthDate, playerCoins: $playerCoins,userId:$userID)
                 }.padding()
                 
             }
         }
+    }
+    
+     func getUserInfo(userID:String){
+        
+        print(userID)
+        let dbRef :DatabaseReference!
+        dbRef = Database.database().reference().child("Users").child("\(userID)")
+        dbRef.observe(.value){ resualt , err in
+            
+            if let user = resualt.value as? NSDictionary {
+                DispatchQueue.main.async {
+                    playerName = user["fullName"] as! String
+                    print(user["fullName"] as! String )
+                }
+                
+                
+                print("🟢")
+               
+            }
+            
+            
+           
+            print(resualt)
+            print(playerName)
+            
+        }
+        
     }
 
 }
@@ -47,7 +84,7 @@ struct infoView : View {
     @Binding var isEditingeOn : Bool
     @Binding var playerBirthDate : Date
     @Binding var playerCoins : String
-    
+    @Binding var userId : String
     var body: some View{
 
         ZStack(alignment: .topLeading){
@@ -55,7 +92,7 @@ struct infoView : View {
             VStack(alignment: .leading){
             
             HStack(alignment: .center){
-            Text("\(playerName) Ahmad's Account ")
+            Text("\(playerName) aa \(userId) ")
             .font(.system(size: 30))
             //.fontDesign(.serif)
             .foregroundColor(Color.white)
@@ -130,7 +167,7 @@ struct infoView : View {
                         .padding([.top] , 30)
                 
                 Button {
-                    //signOut user
+                   logout()
                 } label: {
                     Text("SignOut")
                         .frame(width:200, height: 30 , alignment:.center)
@@ -153,5 +190,14 @@ struct infoView : View {
                 .padding(.top , 160)
         
         }
+    }
+    
+    func logout(){
+        do{
+            try Auth.auth().signOut()
+        } catch{
+            print("error")
+        }
+        
     }
 }

@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
-
-
-
+import Firebase
+import GoogleSignIn
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseDatabase
+import GoogleSignInSwift
 struct Login_signupView: View {
     var body: some View {
         
@@ -75,7 +78,7 @@ struct Login_signupHomeView : View {
                         .offset(y:-150)
                         
                         Button(action: {
-                            
+                            loginUsingGoogle()
                         }) {
                             
                             Image("google")
@@ -94,6 +97,115 @@ struct Login_signupHomeView : View {
             .offset(y: 60)
         }
     }
+    func loginUsingGoogle(){
+        
+           guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+           guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {return}
+
+                  // Create Google Sign In configuration object.
+                  let config = GIDConfiguration(clientID: clientID)
+
+                  GIDSignIn.sharedInstance.configuration = config
+           
+           GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { signInResult , err in
+                      
+                      if err != nil {
+                          
+       //                       showErrorMessage = true
+       //                       errorMessage = "\(err!.localizedDescription)"
+                         print("\(err!.localizedDescription)")
+                      } else {
+                          
+                          
+                  
+                          self.sendData(signInResult: signInResult!)
+                          
+                      }
+                  }
+       }
+    
+    func sendData(signInResult:GIDSignInResult) {
+        
+        let signInResult = signInResult.user
+            // set the data from the google
+            var userID = String()
+            let userName = "\(signInResult.profile!.givenName!) \(signInResult.profile!.familyName!)"
+            let userEmail = "\(signInResult.profile!.email)"
+            let userPassword = ""
+            let userImageProfile = "\(signInResult.profile!.imageURL(withDimension: 300)!)"
+        
+            
+            
+            // generate id for the user
+            
+            for chart in userEmail {
+                if chart != "." {
+                    
+                    if chart != "@" {
+                        let indexItem = userID.index(userID.endIndex, offsetBy: 0)
+                        userID.insert(chart, at: indexItem)
+                    }
+                    
+                }
+            }
+            
+        let path = "profileImages/go\(userID).png"
+            
+            // save profile image to the storage
+            
+            if let  imageURL = URL(string: userImageProfile) {
+                
+                URLSession.shared.dataTask(with: imageURL) { data, response, error in
+                    
+                    // upload image to storage
+                    DispatchQueue.main.async {
+                        
+                        let storageRef : StorageReference!
+                            storageRef = Storage.storage().reference().child(path)
+                            storageRef.putData(data!)
+                        
+                    }
+                }.resume()
+            } // end of imageURL
+            
+            
+            // save user information to the database
+//        let user = User(id: userID, name: userName,email: userEmail, password: userPassword, profileImage: path,jewelry:100)
+//
+//            var dbRef : DatabaseReference!
+//                dbRef = Database.database().reference().child("Users").child("\(userID)")
+//                dbRef.setValue(["fullName":user.name,"email":user.email,"password":user.password,"profileImage":user.profileImage])
+            
+           
+            
+            // navigate to home
+            
+        guard let idToken = signInResult.idToken else { return }
+    
+        let accessToken = signInResult.accessToken
+        
+        let credential = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: accessToken.tokenString)
+        
+        Auth.auth().signIn(with: credential) { authResult, error in
+               
+            if error != nil {
+                print("\(error!.localizedDescription)")
+            } else {
+                
+                let user = User(id: authResult!.user.uid, name: userName,email: userEmail, password: userPassword, profileImage: path,jewelry:100)
+                    
+                    var dbRef : DatabaseReference!
+                        dbRef = Database.database().reference().child("Users").child("\(authResult!.user.uid)")
+                        dbRef.setValue(["fullName":user.name,"email":user.email,"password":user.password,"profileImage":user.profileImage])
+                
+            }
+        }
+        
+           
+        }
+    
+
+    
 }
 
 

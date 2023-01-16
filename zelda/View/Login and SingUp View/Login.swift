@@ -14,6 +14,9 @@ struct Login : View {
     @State var email = ""
     @State var pass = ""
     @Binding var index : Int
+    @State var showErrorMessage = false
+    @State var errorMessage = String()
+    @State var forgotPassword = false
     
     var body: some View{
         
@@ -73,16 +76,25 @@ struct Login : View {
                     
                     Spacer(minLength: 0)
                     
-                    Button(action: {
-                        login(email: self.email, passowrd: self.pass)
-                    }) {
-
+                    NavigationLink(destination: ForgotPassword() ){
                         Text("Forget Password?")
-                            .foregroundColor(Color.white.opacity(1))
-
-
-
+                           .foregroundColor(Color.white.opacity(1))
                     }
+
+                    
+//                    Button(action: {
+////                        login(email: self.email, passowrd: self.pass)
+//                       forgotPassword = true
+//                        NavigationLink(destination: ForgotPassword(), isActive: $forgotPassword) { EmptyView() }
+//
+//                    }) {
+//
+//                        Text("Forget Password?")
+//                            .foregroundColor(Color.white.opacity(1))
+//
+//
+//
+//                    }
                     
                 }
                 .padding(.horizontal)
@@ -104,7 +116,7 @@ struct Login : View {
             
             
             Button(action: {
-                
+                login(email: self.email, password: self.pass)
             }) {
                 
                 Text("LOGIN")
@@ -119,21 +131,40 @@ struct Login : View {
             .offset(y: 25)
             .opacity(self.index == 0 ? 1 : 0)
         }
-        
-    }
-    func login(email:String,passowrd:String){
-        
-        Auth.auth().signIn(withEmail: email, password: passowrd) { authorized , err in
-            
-            if err != nil {
-                print("🔴")
-                print("\(err!.localizedDescription)")
-            } else{
-                print("🟢")
-                print("loged in")
-               
-            }
+        .alert(isPresented: $showErrorMessage){
+            Alert(title:
+                    Text("⚠ Error")
+                        .foregroundColor(Color.red)
+                        .font(.system(.largeTitle)),
+                  message: Text("\(errorMessage)"),
+                  dismissButton: .default(Text("Ok")))
+
         }
+        
     }
+    
+    func login(email:String,password:String){
+        
+        if email == "" || password == "" {
+            
+            showErrorMessage = true
+            errorMessage = "Please fill all the contents "
+            
+        } else {
+            
+            Auth.auth().signIn(withEmail: email, password: password) { authorized , err in
+                
+                if err != nil {
+                    errorMessage = "\(err!.localizedDescription)"
+                    showErrorMessage = true
+                    print("🔴")
+                    
+                } else{
+                    print("🟢")
+                    print("loged in")
+                    
+                }
+            }
+        }}
 }
 

@@ -13,6 +13,7 @@
 		3F0D6B9429747AC400F6B9A0 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D6B9329747AC400F6B9A0 /* Login.swift */; };
 		3F0D6B9629747B1400F6B9A0 /* SingUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D6B9529747B1400F6B9A0 /* SingUp.swift */; };
 		3F0D6B9829747DF500F6B9A0 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D6B9729747DF500F6B9A0 /* Users.swift */; };
+		3F0D6B9A29749CEC00F6B9A0 /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0D6B9929749CEC00F6B9A0 /* ForgotPassword.swift */; };
 		3F3A76B82972E55D002E0BB1 /* zeldaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A76B72972E55D002E0BB1 /* zeldaApp.swift */; };
 		3F3A76BA2972E55D002E0BB1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A76B92972E55D002E0BB1 /* ContentView.swift */; };
 		3F3A76BC2972E55E002E0BB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F3A76BB2972E55E002E0BB1 /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 		3F0D6B9329747AC400F6B9A0 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		3F0D6B9529747B1400F6B9A0 /* SingUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUp.swift; sourceTree = "<group>"; };
 		3F0D6B9729747DF500F6B9A0 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		3F0D6B9929749CEC00F6B9A0 /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		3F3A76B42972E55D002E0BB1 /* zelda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zelda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3A76B72972E55D002E0BB1 /* zeldaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zeldaApp.swift; sourceTree = "<group>"; };
 		3F3A76B92972E55D002E0BB1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				3FE963EA2974570A00E3E1CD /* login&signupView.swift */,
 				3F0D6B9329747AC400F6B9A0 /* Login.swift */,
 				3F0D6B9529747B1400F6B9A0 /* SingUp.swift */,
+				3F0D6B9929749CEC00F6B9A0 /* ForgotPassword.swift */,
 			);
 			path = "Login and SingUp View";
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				3F0D6B8F2974767000F6B9A0 /* Cell.swift in Sources */,
 				AF0DCE2A2973272F00186556 /* StoreView.swift in Sources */,
 				3F3A76B82972E55D002E0BB1 /* zeldaApp.swift in Sources */,
+				3F0D6B9A29749CEC00F6B9A0 /* ForgotPassword.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

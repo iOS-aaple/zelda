@@ -28,69 +28,71 @@ struct Login_signupHomeView : View {
     @State var index = 0
     var body: some View{
         
-
-        GeometryReader{_ in
+        NavigationView{
             
-            VStack{
+            GeometryReader{_ in
                 
-                
-                ZStack{
-                    animationSequence()
-                    SignUP(index: self.$index)
-                        .zIndex(Double(self.index))
-                    Login(index: self.$index)
-
-                }
-                
-                HStack(spacing: 15){
+                VStack{
                     
-                    Rectangle()
-                    .fill(Color("Color1"))
-                    .frame(height: 1)
-                    .offset(y:-150)
-                    Text("OR")
-                        .offset(y:-150)
-                    Rectangle()
-                    .fill(Color("Color1"))
-                    .frame(height: 1)
-                    .offset(y:-150)
-                }
-                .padding(.horizontal, 30)
-                .padding(.top, 200)
-               
-                
-                HStack(spacing: 30){
                     
-                    Button(action: {
+                    ZStack{
+                        animationSequence()
+                        SignUP(index: self.$index)
+                            .zIndex(Double(self.index))
+                        Login(index: self.$index)
                         
-                    }) {
-                        
-                        Image("fb")
-                        .resizable()
-                        .renderingMode(.original)
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
-                        .offset(y:-150)
                     }
                     
-                    Button(action: {
+                    HStack(spacing: 15){
                         
-                    }) {
-                        
-                        Image("google")
-                        .resizable()
-                        .renderingMode(.original)
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
-                        .offset(y:-150)
+                        Rectangle()
+                            .fill(Color("Color1"))
+                            .frame(height: 1)
+                            .offset(y:-150)
+                        Text("OR")
+                            .offset(y:-150)
+                        Rectangle()
+                            .fill(Color("Color1"))
+                            .frame(height: 1)
+                            .offset(y:-150)
                     }
+                    .padding(.horizontal, 30)
+                    .padding(.top, 200)
+                    
+                    
+                    HStack(spacing: 30){
+                        
+                        Button(action: {
+                            
+                        }) {
+                            
+                            Image("fb")
+                                .resizable()
+                                .renderingMode(.original)
+                                .frame(width: 50, height: 50)
+                                .clipShape(Circle())
+                                .offset(y:-150)
+                        }
+                        
+                        Button(action: {
+                            
+                        }) {
+                            
+                            Image("google")
+                                .resizable()
+                                .renderingMode(.original)
+                                .frame(width: 50, height: 50)
+                                .clipShape(Circle())
+                                .offset(y:-150)
+                        }
+                    }
+                    .padding(.top, 30)
                 }
-                .padding(.top, 30)
+                .padding(.vertical)
             }
-            .padding(.vertical)
+            .background(Image("background").edgesIgnoringSafeArea(.all))
+            .offset(y: 70)
         }
-        .background(Image("background").edgesIgnoringSafeArea(.all))
-        .offset(y: 70)
     }
 }
 

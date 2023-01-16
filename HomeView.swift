@@ -20,9 +20,7 @@ struct HomeView_Previews: PreviewProvider {
 }
 struct Home: View {
     @State var midY : CGFloat = 0
-//    var image : String
-//    @Binding var selectedTab : String
-    
+    @State var selectedTab = "person.3.sequence.fill"
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -32,52 +30,68 @@ struct Home: View {
                            .aspectRatio(geometry.size, contentMode: .fill)
                            .edgesIgnoringSafeArea(.all)
                        VStack {
-                           ForEach(gamesImages,id: \.self){ image in
-                               GeometryReader { reader in
-                                   Button ( action : {} , label: {
-                                       Image(image)
-                                           .resizable()
-                                           .renderingMode(.original)
-                                           .aspectRatio( contentMode: .fit)
-                                           .frame(width: 90)
-                                      
-                                   })
-                                   .frame(width: 150, height: 110)
-                                   .onAppear(perform: {
-                                       if image == gamesImages.first {
-                                           self.midY = reader.frame(in: .global).midY
-                                       }
-                               })
+                           HStack {
+                               Text("Let's play!")
+                                   .font(.title)
+                                   .fontWeight(.bold)
+                                   .foregroundColor(.white)
+                               
+                               Spacer()
+                               
+                           }
+                           HStack {
+                               // for side bar and the details
+                               VStack {
+//                                   ForEach(HomeData){ i in
+//
+//                                   }
                                }
+                           }
+                           HStack {
+                               // for tab bar
+                               NavigationLink (
+                                   destination :
+                                   FrindsView()
+                                   , label : {
+                                       ButtonTabBar(image: Image(systemName: "person.3.sequence.fill")) {}
+                                   }
+                              )
+                               NavigationLink (
+                                   destination :
+                                    HomeView()
+                                   , label : {
+                                       ButtonTabBar(image: Image(systemName: "house")) {}
+                                   }
+                              )
+                               NavigationLink (
+                                   destination :
+                                   AccountView()
+                                   , label : {
+                                       ButtonTabBar(image: Image(systemName: "person.crop.circle")) {}
+                                   }
+                              )
+                              
+
                              
                            }
-                         
-                       }
-                       
-                       .padding(.horizontal, 0)
-                       .padding(.vertical)
-                       .background(Color(red: 0.01332890149, green: 0.04810451716, blue:  0.1187042817))
-                       .frame(height: 500)
-                       .clipShape(CShape())
-                       .padding(.trailing, 260)
-                       .padding(.leading)
-                       HStack {
-//                            for tab bar
-                           GeometryReader { reader in
-                               Button( action: { }, label: {
-//                                   Image(systemName: image)
-                               })
-                               
-                               //max frame
-                               .frame(maxWidth: .infinity, maxHeight: .infinity)
-                           }
-                           
+                           .padding()
+                           .background(Color(red: 0.01332890149, green: 0.04810451716, blue:  0.1187042817))
+                           .clipShape(Capsule())
+                           .frame(maxWidth: 250)
+                           .padding(.horizontal)
+                           .shadow(color: Color.black.opacity(0.9), radius: 8, x: 2, y: 6)
+                           .frame(maxHeight: .infinity, alignment: .bottom)
                        }
                      
                    }
             }
         }
     }
+    
+   
+    
+    var games = [HomeData(id: 0, image: "XO", name: "Tic Tac Toe", description: "") ]
+    
     func getColor(image: String) -> Color{
         switch image {
         case "person.2" :
@@ -132,36 +146,27 @@ struct CustomShape: Shape {
         }
     }
 }
-struct TabBar: View {
-    let image: Image
-    let type:String
-    var numberOfProducts:Int
+
+
+struct HomeData : Identifiable{
+    let id : Int
+    let image : String
+    let name : String
+    let description : String
+}
+
+struct ButtonTabBar: View {
+    let image : Image
+    let action : () -> Void
     var body: some View {
-        if type == "ShopingCart"{
-            ZStack(alignment: .topTrailing){
-                image
-                    .resizable()
-                    .accentColor(.black)
-                    .frame(width: 33,height: 30)
-                    .frame(maxWidth: 150)
+        HStack{
+            image
+                .resizable()
+                .frame(width: 27, height: 23)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
                 
-//                Text("\(myCart.count)")
-                    .foregroundColor(Color.white)
-                    .font(.caption2).bold()
-                    .frame(width: 15,height: 15)
-                    .background(
-                        Circle().fill(Color.red)
-                      
-                    )
-            }
-        } else{
-            HStack{
-                       image
-                            .resizable()
-                            .accentColor(.black)
-                            .frame(width: 33,height: 30)
-                            .frame(maxWidth: 150)
-                   }
+                
         }
     }
 }

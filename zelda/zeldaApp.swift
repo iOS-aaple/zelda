@@ -19,10 +19,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct zeldaApp: App {
+    @StateObject var appState = AppState.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
             ContentView()
+           // snake().id(appState.gameID)
         }
     }
+}
+
+class AppState: ObservableObject{
+    static let shared = AppState()
+    @Published var gameID = UUID()
 }

@@ -37,16 +37,13 @@ struct Home: View {
                                    .foregroundColor(.white)
                                
                                Spacer()
-                               
                            }
-                           HStack {
                                // for side bar and the details
-                               VStack {
-//                                   ForEach(HomeData){ i in
-//
-//                                   }
+                           VStack(spacing: 20){
+                               ForEach(games) { i in
+                                   GamesView(gamesData: i)
                                }
-                           }
+                               }
                            HStack {
                                // for tab bar
                                NavigationLink (
@@ -73,7 +70,7 @@ struct Home: View {
                               
 
                              
-                           }
+                           } // tab bar
                            .padding()
                            .background(Color(red: 0.01332890149, green: 0.04810451716, blue:  0.1187042817))
                            .clipShape(Capsule())
@@ -90,7 +87,9 @@ struct Home: View {
     
    
     
-    var games = [HomeData(id: 0, image: "XO", name: "Tic Tac Toe", description: "") ]
+    var games = [HomeData(id: 0, image: "XO", name: "Tic Tac Toe", description: ""),
+                HomeData(id: 1, image: "snakeandladder", name: "snake and ladder", description: ""),
+                HomeData(id: 3, image: "puzzle", name: "puzzle", description: "")]
     
     func getColor(image: String) -> Color{
         switch image {
@@ -167,6 +166,18 @@ struct ButtonTabBar: View {
                 .frame(maxWidth: .infinity)
                 
                 
+        }
+    }
+}
+
+struct GamesView : View {
+    var gamesData : HomeData
+    var body: some View {
+        HStack {
+            Image(self.gamesData.image)
+                .resizable()
+                .frame(width: 130,height: 130)
+            Spacer()
         }
     }
 }

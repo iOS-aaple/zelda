@@ -32,6 +32,9 @@
 		3F3A76EF29730054002E0BB1 /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A76EE29730054002E0BB1 /* ChatsView.swift */; };
 		3FE963EB2974570A00E3E1CD /* login&signupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE963EA2974570A00E3E1CD /* login&signupView.swift */; };
 		848A33A12975B8A6008D9957 /* snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A33A02975B8A6008D9957 /* snake.swift */; };
+		848A33AB2976120A008D9957 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A33AA2976120A008D9957 /* Memory.swift */; };
+		848A33AD2976123D008D9957 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A33AC2976123D008D9957 /* CardView.swift */; };
+		848A33AF2976128B008D9957 /* MemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848A33AE2976128B008D9957 /* MemoryGameView.swift */; };
 		AF0DCE282973271B00186556 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0DCE272973271B00186556 /* HomeView.swift */; };
 		AF0DCE2A2973272F00186556 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0DCE292973272F00186556 /* StoreView.swift */; };
 		AF0DCE2C29733A9800186556 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF0DCE2B29733A9800186556 /* GoogleService-Info.plist */; };
@@ -56,6 +59,9 @@
 		3F854BEB2975BCCF00AEF852 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FE963EA2974570A00E3E1CD /* login&signupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "login&signupView.swift"; sourceTree = "<group>"; };
 		848A33A02975B8A6008D9957 /* snake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = snake.swift; sourceTree = "<group>"; };
+		848A33AA2976120A008D9957 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
+		848A33AC2976123D008D9957 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		848A33AE2976128B008D9957 /* MemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameView.swift; sourceTree = "<group>"; };
 		AF0DCE272973271B00186556 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = SOURCE_ROOT; };
 		AF0DCE292973272F00186556 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		AF0DCE2B29733A9800186556 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -144,6 +150,7 @@
 		3F3A76E929730011002E0BB1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				848A33A9297611D3008D9957 /* Matched Cards Game */,
 				3F0D6B9229747AA000F6B9A0 /* Login and SingUp View */,
 				3F3A76EB2973002E002E0BB1 /* FrindsView */,
 				AF0DCE272973271B00186556 /* HomeView.swift */,
@@ -172,6 +179,16 @@
 				E44717EF2973F29F00EA5834 /* AccountView.swift */,
 			);
 			path = FrindsView;
+			sourceTree = "<group>";
+		};
+		848A33A9297611D3008D9957 /* Matched Cards Game */ = {
+			isa = PBXGroup;
+			children = (
+				848A33AA2976120A008D9957 /* Memory.swift */,
+				848A33AC2976123D008D9957 /* CardView.swift */,
+				848A33AE2976128B008D9957 /* MemoryGameView.swift */,
+			);
+			path = "Matched Cards Game";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,7 +287,10 @@
 				3F0D6B9629747B1400F6B9A0 /* SingUp.swift in Sources */,
 				3F0D6B9829747DF500F6B9A0 /* Users.swift in Sources */,
 				3F3A76BA2972E55D002E0BB1 /* ContentView.swift in Sources */,
+				848A33AB2976120A008D9957 /* Memory.swift in Sources */,
 				848A33A12975B8A6008D9957 /* snake.swift in Sources */,
+				848A33AD2976123D008D9957 /* CardView.swift in Sources */,
+				848A33AF2976128B008D9957 /* MemoryGameView.swift in Sources */,
 				AF0DCE282973271B00186556 /* HomeView.swift in Sources */,
 				E44717F02973F29F00EA5834 /* AccountView.swift in Sources */,
 				3F0D6B8C2974761400F6B9A0 /* Messages.swift in Sources */,

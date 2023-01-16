@@ -19,7 +19,7 @@ struct SignUP : View {
     @State var Repass = ""
     @Binding var index : Int
     let userOp = Users()
-    @State var showErrorMessage = true
+    @State var showErrorMessage = false
     @State  var errorMessage = String()
     
     var body: some View{
@@ -109,17 +109,6 @@ struct SignUP : View {
                 .padding(.horizontal)
                 .padding(.top, 30)
                 
-             
-                if !showErrorMessage {
-                    HStack(spacing: 15){
-                        
-                        Text(errorMessage)
-                            .padding(.horizontal)
-                            .padding(.top, 30)
-                    }
-                    
-                }
-                
             }
             .padding()
             .padding(.bottom, 65)
@@ -138,7 +127,7 @@ struct SignUP : View {
             // Button
             
             Button(action: {
-                singup(name: self.fullName, email: self.email, password: self.pass)
+                singup(name: self.fullName, email: self.email, password: self.pass,rePassword: self.Repass)
             }) {
                 
                 Text("SIGNUP")
@@ -154,20 +143,38 @@ struct SignUP : View {
             
             .opacity(self.index == 1 ? 1 : 0)
         }
-        //    .offset(y: 50)
+        .alert(isPresented: $showErrorMessage) {
+            Alert(title:
+                    Text("⚠ Error")
+                        .foregroundColor(Color.red)
+                        .font(.system(.largeTitle)),
+                  message: Text("\(errorMessage)"),
+                  dismissButton: .default(Text("Ok")))
+                }
+
     }
     
-     func singup(name:String,email:String,password:String){
+    func singup(name:String,email:String,password:String,rePassword:String){
+         
+        if email == "" || password == "" || name == "" || rePassword == "" {
+            
+            showErrorMessage = true
+            errorMessage = "Please fill all the contents "
+            
+        } else if password != rePassword {
+            showErrorMessage = true
+            errorMessage = "password not match"
+        }
+        else {
+            
         
         Auth.auth().createUser(withEmail: email, password: password){ authrize , err  in
             
             if err != nil {
                 
-                
-                
-//                .alert(isPresented: $showErrorMessage) {
-//                           Alert(title: Text("Important message"), message: Text("Wear sunscreen"), dismissButton: .default(Text("Got it!")))
-//                       }
+                showErrorMessage = true
+                errorMessage = "\(err!.localizedDescription)"
+               
                 
             } else {
                 
@@ -176,7 +183,7 @@ struct SignUP : View {
                 dbRef.setValue(["fullName":name,"email":email,"password":password])
                 
                 
-                
+            }
             }
         }
         

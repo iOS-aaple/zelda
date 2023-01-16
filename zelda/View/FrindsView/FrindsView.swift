@@ -9,7 +9,27 @@ import SwiftUI
 
 struct FrindsView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+    
+            ZStack{
+                Image("background")
+                    .resizable()
+                    .edgesIgnoringSafeArea(.all)
+                VStack{
+                    
+                    List{
+                        ForEach(1..<10){ i in
+                            NavigationLink(destination: ChatsView() ){
+                                Cell()
+                            }
+                            
+                        }.listRowBackground(Color.clear)
+                    }.background(.clear)
+                        .scrollContentBackground(.hidden)
+                }
+               
+            }
+        }
     }
 }
 

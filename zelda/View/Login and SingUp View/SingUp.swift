@@ -167,6 +167,8 @@ struct SignUP : View {
         }
         else {
             
+            
+            
         
         Auth.auth().createUser(withEmail: email, password: password){ authrize , err  in
             

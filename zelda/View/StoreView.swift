@@ -42,13 +42,23 @@ struct Characters : View {
                                 .foregroundColor(.white)
                             
                             Spacer()
-                            Button(action: { }, label: {
-                                Image("shop")
-                                    .resizable()
-                                    .font(.title)
-                                    .foregroundColor(.white)
-                                    .frame(width: 60, height: 40)
-                            })
+                            HStack {
+                                Button(action : {
+                                    
+                                }) {
+                                    Image("star")
+                                        .resizable()
+                                        .font(.title)
+                                        .foregroundColor(.white)
+                                        .frame(width: 50, height: 30)
+                                        
+                                }
+                                Text("100")
+                                    .foregroundColor(Color(red: 0.01332890149, green: 0.04810451716, blue:  0.1187042817))
+                            }
+                            .padding(.trailing)
+                        .background(Color(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393))
+                        .cornerRadius(10)
                         } // head bar
                         .padding(.horizontal)
                         .padding(.top)
@@ -176,15 +186,24 @@ struct Detail : View {
                                     .foregroundColor(.white)
                             }
                             Spacer()
-                            Button(action : {
-                                
-                            }) {
-                                Image("shop")
-                                    .resizable()
-                                    .font(.title)
-                                    .foregroundColor(.white)
-                                    .frame(width: 60, height: 40)
+                            
+                            HStack {
+                                Button(action : {
+                                    
+                                }) {
+                                    Image("star")
+                                        .resizable()
+                                        .font(.title)
+                                        .foregroundColor(.white)
+                                        .frame(width: 50, height: 30)
+                                        
+                                }
+                                Text("100")
+                                    .foregroundColor(Color(red: 0.01332890149, green: 0.04810451716, blue:  0.1187042817))
                             }
+                            .padding(.trailing)
+                        .background(Color(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393))
+                        .cornerRadius(10)
                         }
                         Text("Overview")
                             .font(.title)
@@ -202,7 +221,24 @@ struct Detail : View {
                         .font(.system(size: 55))
                         .foregroundColor(.white)
                         .padding(.top)
-                    Text("Description")
+                    HStack {
+                        Button(action : {
+                            
+                        }) {
+                            Image("star")
+                                .resizable()
+                                .font(.title)
+                                .foregroundColor(.white)
+                                .frame(width: 50, height: 30)
+                                
+                        }
+                        Text("\(self.data.price)")
+                            .foregroundColor(Color(red: 0.01332890149, green: 0.04810451716, blue:  0.1187042817))
+                    }
+                    .padding(.trailing)
+                .background(Color(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393))
+                .cornerRadius(10)
+                    Text(self.data.description)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.white)
                         .padding(.top)
@@ -236,7 +272,7 @@ struct Detail : View {
                                 
                         }
                     }
-                    .padding(.top, 30)
+                    .padding(.top)
                     Spacer()
                     
                 }
@@ -251,9 +287,11 @@ struct Player : Identifiable {
     let image : String
     let name : String
     let color : Color
+    let price : Int
+    let description : String
 }
-var data = [Player(id: 0, power: [0.2,0.5,0.9], image: "1", name: "Sherman", color: .clear),
-            Player(id: 1, power: [0.3,0.5,0.6], image: "luca", name: "Luca", color: .clear),
-            Player(id: 2, power: [0.3,0.5,0.6], image: "marty", name: "Marty", color: .clear)
+var data = [Player(id: 0, power: [0.2,0.5,0.9], image: "1", name: "Sherman", color: .clear, price: 500, description: ""),
+            Player(id: 1, power: [0.3,0.5,0.6], image: "luca", name: "Luca", color: .clear, price: 800, description: ""),
+            Player(id: 2, power: [0.7,0.5,1], image: "marty", name: "Marty", color: .clear, price: 1000, description: "")
 ]
 

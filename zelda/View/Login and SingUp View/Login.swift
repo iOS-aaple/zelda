@@ -103,8 +103,8 @@ struct Login : View {
             .padding()
             .padding(.bottom, 65)
             .background(Color("Color2"))
-            .clipShape(CShape())
-            .contentShape(CShape())
+            .clipShape(CShapeLogin())
+            .contentShape(CShapeLogin())
             .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: -5)
             .onTapGesture {
                 
@@ -128,7 +128,7 @@ struct Login : View {
                     .clipShape(Capsule())
                     .shadow(color: Color.white.opacity(0.1), radius: 5, x: 0, y: 5)
             }
-            .offset(y: 25)
+            .offset(y: 50)
             .opacity(self.index == 0 ? 1 : 0)
         }
         .alert(isPresented: $showErrorMessage){

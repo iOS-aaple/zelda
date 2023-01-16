@@ -36,7 +36,7 @@ struct Login_signupHomeView : View {
                     
                     
                     ZStack{
-                        animationSequence()
+                       // animationSequence()
                         SignUP(index: self.$index)
                             .zIndex(Double(self.index))
                         Login(index: self.$index)
@@ -71,8 +71,8 @@ struct Login_signupHomeView : View {
                                 .renderingMode(.original)
                                 .frame(width: 50, height: 50)
                                 .clipShape(Circle())
-                                .offset(y:-150)
                         }
+                        .offset(y:-150)
                         
                         Button(action: {
                             
@@ -83,15 +83,15 @@ struct Login_signupHomeView : View {
                                 .renderingMode(.original)
                                 .frame(width: 50, height: 50)
                                 .clipShape(Circle())
-                                .offset(y:-150)
                         }
+                        .offset(y:-150)
                     }
                     .padding(.top, 30)
                 }
                 .padding(.vertical)
             }
             .background(Image("background").edgesIgnoringSafeArea(.all))
-            .offset(y: 70)
+            .offset(y: 60)
         }
     }
 }

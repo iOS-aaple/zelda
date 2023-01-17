@@ -22,9 +22,7 @@ struct AccountView: View {
     @State var userInfo = [NSDictionary]()
     @StateObject private var user = Users()
     
-    init(){
-        user.getUserInfo(userID: userID)
-    }
+    
   
     var body: some View {
         
@@ -36,7 +34,7 @@ struct AccountView: View {
                     .aspectRatio(geometry.size, contentMode: .fill)
                     .edgesIgnoringSafeArea(.all)
                 VStack {
-                    infoView(playerName: $playerName, playerEmail: $playerEmail , playerPassword:  $playerPassword , isEditingeOn: $editingToggle, playerBirthDate: $playerBirthDate, playerCoins: $playerCoins,userId:$userID)
+                    infoView(playerName: $playerName, playerEmail: $playerEmail , playerPassword:  $playerPassword , isEditingeOn: $editingToggle, playerBirthDate: $playerBirthDate, playerCoins: $playerCoins,userId:$userID,user: user.user)
                 }.padding()
                 
             }
@@ -65,6 +63,8 @@ struct infoView : View {
     @Binding var playerBirthDate : Date
     @Binding var playerCoins : String
     @Binding var userId : String
+    @State var  successLogout  = false
+    var user : User?
     var body: some View{
 
         ZStack(alignment: .topLeading){
@@ -72,7 +72,7 @@ struct infoView : View {
             VStack(alignment: .leading){
             
             HStack(alignment: .center){
-            Text("\(playerName) aa \(userId) ")
+                Text("\(user?.name ?? "userName")")
             .font(.system(size: 30))
             //.fontDesign(.serif)
             .foregroundColor(Color.white)
@@ -86,7 +86,7 @@ struct infoView : View {
                     Image("dollar")
                     .resizable()
                     .frame(width: 30 , height: 30)
-                    Text("\(playerCoins)120$")
+                    Text("\(playerCoins) \(user?.jewelry ?? 0) $")
                     .foregroundColor(Color.white)
                 }.padding(20)
 
@@ -96,21 +96,21 @@ struct infoView : View {
                 ZStack(alignment: .leading){
                 Image(systemName:"person")
 
-                TextField("", text: $playerName , prompt: Text("\(playerName)  ...").foregroundColor(.white.opacity(0.6))) // if the  placeeholder displayes the last stored name in db will be 👍🏻
+                    TextField("", text: $playerName , prompt: Text("\(user?.name ?? "")").foregroundColor(.white.opacity(0.6))) // if the  placeeholder displayes the last stored name in db will be 👍🏻
                     .padding([.leading] , 30)
                     .disabled(!isEditingeOn)
                 }.foregroundColor(.white)
                 
                 ZStack(alignment: .leading){
                 Image(systemName:"at")
-                TextField("", text: $playerEmail, prompt: Text("Email...").foregroundColor(.white.opacity(0.6)))
-                    .disabled(!isEditingeOn)
+                TextField("", text: $playerEmail, prompt: Text("\(user?.email ?? "")").foregroundColor(.white.opacity(0.6)))
+                    .disabled(true)
                     .padding([.leading] , 30)
                 }.foregroundColor(.white)
                 
                 ZStack(alignment: .leading){
                 Image(systemName:"staroflife.circle")
-                SecureField("", text: $playerPassword, prompt: Text("Password...").foregroundColor(.white.opacity(0.6)))
+                SecureField("", text: $playerPassword, prompt: Text("\(user?.password ?? "")").foregroundColor(.white.opacity(0.6)))
                     .disabled(!isEditingeOn)
                     .padding([.leading] , 30)
                 }.foregroundColor(.white)
@@ -136,14 +136,14 @@ struct infoView : View {
                
                 
                     Button {
-                        //update content in db
+                        update()
                     } label: {
                         Text("Save Edition")
                             .frame(width:200, height: 30 , alignment:.center)
                             .background(Color.gray.opacity(0.4))
                             .foregroundColor(Color.white)
                             .cornerRadius(8)
-                    }.disabled(playerName.isEmpty || playerEmail.isEmpty || playerPassword.isEmpty) // wrong opinion
+                    }.disabled(playerName.isEmpty || playerPassword.isEmpty) // wrong opinion
                         .padding([.top] , 30)
                 
                 Button {
@@ -154,6 +154,8 @@ struct infoView : View {
                         .background(Color.gray.opacity(0.4))
                         .foregroundColor(Color.red)
                         .cornerRadius(8)
+                } .fullScreenCover(isPresented: $successLogout) {
+                    ContentView()
                 }
                 
             }.padding(30)
@@ -163,7 +165,7 @@ struct infoView : View {
                
             }
             
-            Image("1")
+            Image("\(user?.profileImage ?? "1")")
                 .resizable()
                 .frame(width: 120 , height: 180)
                 .padding(.leading , 40)
@@ -175,9 +177,25 @@ struct infoView : View {
     func logout(){
         do{
             try Auth.auth().signOut()
+            successLogout = true
         } catch{
             print("error")
         }
+        
+    }
+    
+    func update(){
+        
+        
+        let currentUser = Auth.auth().currentUser
+            currentUser?.updatePassword(to: playerPassword)
+        
+        
+        let dbRef: DatabaseReference!
+        dbRef = Database.database().reference().child("Users").child("\(userId)")
+        
+        dbRef.updateChildValues(["fullName":playerName,"email":user!.email ,"password":playerPassword,"profileImage": user!.profileImage, "jewelry": user!.jewelry ])
+        
         
     }
 }

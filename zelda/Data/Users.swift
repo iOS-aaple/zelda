@@ -15,12 +15,14 @@ import FirebaseStorage
 class Users : ObservableObject {
     
     @Published var users: [User] = []
-    @Published var userInfo: [User] = []
+    @Published var user : User?
     
     init(){
         getAllUsers()
         //getUserInfo(userID: Auth.auth().currentUser?.uid ?? "")
+        getUserInfo()
     }
+    
     func singup(name:String,email:String,password:String){
         
         Auth.auth().createUser(withEmail: email, password: password){ authrize , err  in
@@ -39,28 +41,31 @@ class Users : ObservableObject {
         }
     }
     
-    func getUserInfo(userID:String){
+    func getUserInfo(){
         
-        
-        let dbRef :DatabaseReference!
-        dbRef = Database.database().reference().child("Users").child("\(userID)")
-        dbRef.observe(.value){ resualt, err  in
+        if Auth.auth().currentUser != nil {
+            let userID = Auth.auth().currentUser!.uid
             
-            if err != nil {
-                print("error")
-            } else {
-                if let user = resualt.value as? NSDictionary {
-                    
-                    let newUser = User(id: userID, name: user["fullName"] as! String, email: user["email"] as! String, password: user["password"] as! String, profileImage: user["profileImage"] as! String, jewelry: 100)
-                    
-                    self.userInfo.append(newUser)
+            let dbRef :DatabaseReference!
+                dbRef = Database.database().reference().child("Users").child("\(userID)")
+                dbRef.observe(.value){ resualt, err  in
+                
+                if err != nil {
+                    print("error")
+                } else {
+                    if let user = resualt.value as? NSDictionary {
+                                                let newUser = User(id: userID, name: user["fullName"] as! String, email: user["email"] as! String, password: user["password"] as! String, profileImage: user["profileImage"] as! String, jewelry: 100)
+                        
+                        
+                        self.user = newUser
+                        print(self.user)
+                        
+                    }
                     
                 }
                 
             }
-            
         }
-        
     }
     
     func getAllUsers(){

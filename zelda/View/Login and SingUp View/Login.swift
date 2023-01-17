@@ -17,7 +17,7 @@ struct Login : View {
     @State var showErrorMessage = false
     @State var errorMessage = String()
     @State var forgotPassword = false
-    
+    @State var showForgotPasswordScreen = false
     var body: some View{
         
         ZStack(alignment: .bottom) {
@@ -76,25 +76,22 @@ struct Login : View {
                     
                     Spacer(minLength: 0)
                     
-                    NavigationLink(destination: ForgotPassword() ){
-                        Text("Forget Password?")
-                           .foregroundColor(Color.white.opacity(1))
-                    }
+//                    NavigationLink(destination: ForgotPassword() ){
+//                        Text("Forget Password?")
+//                           .foregroundColor(Color.white.opacity(1))
+//                    }
 
                     
-//                    Button(action: {
-////                        login(email: self.email, passowrd: self.pass)
-//                       forgotPassword = true
-//                        NavigationLink(destination: ForgotPassword(), isActive: $forgotPassword) { EmptyView() }
-//
-//                    }) {
-//
-//                        Text("Forget Password?")
-//                            .foregroundColor(Color.white.opacity(1))
-//
-//
-//
-//                    }
+                    Button(action: {
+//                        login(email: self.email, passowrd: self.pass)
+                        showForgotPasswordScreen.toggle()
+
+                    },label: {
+                        Text("Forget Password?")
+                            .foregroundColor(Color.white.opacity(1))
+                    }).sheet(isPresented: $showForgotPasswordScreen) {
+                        ForgotPassword()
+                    }
                     
                 }
                 .padding(.horizontal)

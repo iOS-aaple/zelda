@@ -16,24 +16,27 @@ class Messages:ObservableObject  {
     
     @Published var message: [Message] = []
     @Published var lastMessageId : String = ""
-    
-    init(){
-        getMessage(chatID: "12345")
+    @Published var chatID : String = ""
+    let receiverUser : User?
+    init(receiverUser:User){
+        self.receiverUser = receiverUser
+        getMessage()
     }
-  static func sendMessage(text:String,senderID:String){
+     func sendMessage(text:String,senderID:String,chatID:String,receiverID:String){
+        
         
       let dbRef : DatabaseReference!
-      dbRef = Database.database().reference().child("Chats").child("12345").child("Messages").child("\(UUID())")
-      dbRef.updateChildValues(["text":text,"senderID":senderID,"time":"\(Date())"])
+        dbRef = Database.database().reference().child("Chats").child("\(UUID())").child("Messages").child("\(UUID())")
+          dbRef.updateChildValues(["text":text,"senderID":senderID,"receiverID":receiverID,"time":"\(Date())"])
     
     }
     
-     func getMessage(chatID:String){
+     func getMessage(){
         
         
         let dbRef: DatabaseReference!
-        dbRef = Database.database().reference().child("Chats").child("\(chatID)").child("Messages")
-        dbRef.observe(.childAdded) { dataSnapshot, err in
+         dbRef = Database.database().reference().child("Chats").child("\(receiverUser!.id)\(Auth.auth().currentUser!.uid)").child("Messages")
+            dbRef.observe(.childAdded) { dataSnapshot, err in
             
             if let allMessages = dataSnapshot.value as? NSDictionary {
  
@@ -41,7 +44,7 @@ class Messages:ObservableObject  {
                 dateFormater.dateFormat = "yyyy-MM-dd HH:mm:ssZ"
                let time =  dateFormater.date(from: "\(allMessages["time"] as! String)")
                 
-                let newMessage = Message(id: dataSnapshot.key, text: allMessages["text"] as! String, resivserID: allMessages["senderID"] as! String,time: time!)
+                let newMessage = Message(id: dataSnapshot.key, text: allMessages["text"] as! String, resivserID: allMessages["receiverID"] as! String, senderID: allMessages["senderID"] as! String,time: time!)
                 self.message.append(newMessage)
             }
             self.message.sort {$0.time < $1.time}
@@ -59,6 +62,7 @@ struct Message: Identifiable , Codable{
     var id : String
     var text:String
     var resivserID : String
+    var senderID : String
     var time:Date
 }
 

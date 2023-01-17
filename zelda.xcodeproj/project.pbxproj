@@ -65,7 +65,7 @@
 		848A33AA2976120A008D9957 /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		848A33AC2976123D008D9957 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		848A33AE2976128B008D9957 /* MemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameView.swift; sourceTree = "<group>"; };
-		AF0DCE272973271B00186556 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = SOURCE_ROOT; };
+		AF0DCE272973271B00186556 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeView.swift; path = zelda/View/Home/HomeView.swift; sourceTree = SOURCE_ROOT; };
 		AF0DCE292973272F00186556 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		AF0DCE2B29733A9800186556 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E44717EF2973F29F00EA5834 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 				848A33A9297611D3008D9957 /* Matched Cards Game */,
 				3F0D6B9229747AA000F6B9A0 /* Login and SingUp View */,
 				3F3A76EB2973002E002E0BB1 /* FrindsView */,
-				AF0DCE272973271B00186556 /* HomeView.swift */,
+				AFC2DDCB2976A90900C2073C /* Home */,
 				AF0DCE292973272F00186556 /* StoreView.swift */,
 				3F3A76B92972E55D002E0BB1 /* ContentView.swift */,
 				848A33A02975B8A6008D9957 /* snake.swift */,
@@ -196,6 +196,14 @@
 				848A33AE2976128B008D9957 /* MemoryGameView.swift */,
 			);
 			path = "Matched Cards Game";
+			sourceTree = "<group>";
+		};
+		AFC2DDCB2976A90900C2073C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AF0DCE272973271B00186556 /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		E4DCF50E29767D4900FF02C8 /* PuzzleGame */ = {

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Cell: View {
      
-  //  @Binding var order : Int
+    @State var user : User
     var body: some View {
         
         HStack{
@@ -23,7 +23,7 @@ struct Cell: View {
             
             ZStack{
                 HStack(){
-                    Text("user name")
+                    Text("\(user.name)")
                         .foregroundColor(Color.white)
                     Spacer()
                     Image("Awards_bronze")
@@ -37,8 +37,8 @@ struct Cell: View {
 }
 
 
-struct Cell_Previews: PreviewProvider {
-    static var previews: some View {
-        Cell()
-    }
-}
+//struct Cell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Cell()
+//    }
+//}

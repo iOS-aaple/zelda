@@ -29,6 +29,7 @@ struct ForgotPassword: View {
                             .foregroundColor(Color.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
+                    .padding(.top,20)
                     HStack{
                         Text("Enter the email associated with your account and we'll send an email to reast your password ")
                             .foregroundColor(Color.white)

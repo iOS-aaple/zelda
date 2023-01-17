@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct FrindsView: View {
+    
+    @ObservedObject var usersManger = Users()
     var body: some View {
         NavigationView {
     
@@ -18,9 +20,9 @@ struct FrindsView: View {
                 VStack{
                     
                     List{
-                        ForEach(1..<10){ i in
-                            NavigationLink(destination: ChatsView() ){
-                                Cell()
+                        ForEach(usersManger.users){ user in
+                            NavigationLink(destination: ChatsView(resUser: user, messagesManger: Messages(receiverUser: user)) ){
+                                Cell(user: user)
                             }
                             
                         }.listRowBackground(Color.clear)

@@ -19,12 +19,13 @@ struct AccountView: View {
     @State var playerBirthDate = Date.now
     @State var playerCoins = ""
     @State var userID = "\(Auth.auth().currentUser!.uid)"
-    @State var userInfo = NSDictionary()
+    @State var userInfo = [NSDictionary]()
+    @StateObject private var user = Users()
     
-    
-    init() {
-        getUserInfo(userID: userID)
+    init(){
+        user.getUserInfo(userID: userID)
     }
+  
     var body: some View {
         
         GeometryReader{
@@ -39,35 +40,14 @@ struct AccountView: View {
                 }.padding()
                 
             }
+        }.onAppear{
+           
+            
         }
     }
     
-     func getUserInfo(userID:String){
-        
-        print(userID)
-        let dbRef :DatabaseReference!
-        dbRef = Database.database().reference().child("Users").child("\(userID)")
-        dbRef.observe(.value){ resualt , err in
-            
-            if let user = resualt.value as? NSDictionary {
-                DispatchQueue.main.async {
-                    playerName = user["fullName"] as! String
-                    print(user["fullName"] as! String )
-                }
-                
-                
-                print("🟢")
-               
-            }
-            
-            
-           
-            print(resualt)
-            print(playerName)
-            
-        }
-        
-    }
+     
+     
 
 }
 

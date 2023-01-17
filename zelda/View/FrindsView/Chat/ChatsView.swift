@@ -6,20 +6,29 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import FirebaseDatabase
+import Firebase
+import FirebaseFirestore
 
 struct ChatsView: View {
   
+    @State var resUser : User
     @State var text = ""
     @State var isFocused = true
-    @StateObject var messagesManger = Messages()
+    @StateObject var messagesManger : Messages
     @State var showTime = false
+    
+   
+   
+   
     var body: some View {
         
       
         VStack(spacing:0){
             
                 VStack{
-                    Title()
+                    Title(user:resUser)
                         ScrollViewReader { proxy in
                             ScrollView{
                                 getMessageView()
@@ -37,6 +46,10 @@ struct ChatsView: View {
             }
                 .navigationBarHidden(true)
         }
+        .onAppear{
+            messagesManger.chatID = "\(resUser.id)\(Auth.auth().currentUser!.uid)"
+            print(messagesManger.chatID)
+        }
         .background(  Image("background")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
@@ -48,7 +61,7 @@ struct ChatsView: View {
         
         
         ForEach(messagesManger.message){ message in
-            let isReceived = message.resivserID == "123456"
+            let isReceived = message.resivserID == resUser.id
             VStack(alignment: isReceived ?.leading : .trailing){
 
                 messageBubble(text: message.text, isResived: isReceived,messageTime: message.time)
@@ -72,16 +85,16 @@ struct ChatsView: View {
                 TextField("Message.....",text: $text)
                     .padding(.horizontal,10)
                     .frame(height:37)
-                    .background(Color.white)
+                    .background(Color.black).opacity(0.5)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                   
                 
                 Button(action: {
-                    Messages.sendMessage(text: text, senderID: "123456")
+                    messagesManger.sendMessage(text: text, senderID: Auth.auth().currentUser!.uid, chatID: "\(resUser.id) \(Auth.auth().currentUser!.uid)", receiverID: resUser.id)
                     text = ""
                 }){
                     Image("sendMessageIcon")
-                        .foregroundColor(.white)
+                        .foregroundColor(.gray)
                         .frame(width: 32,height: 32)
                         .background(
                             Circle()
@@ -89,11 +102,12 @@ struct ChatsView: View {
                         )
                 }.disabled(text.isEmpty)
             }
-            .padding(.vertical,10)
+            .padding(.vertical,13)
             .padding(.horizontal)
             .background(.thinMaterial)
-            .cornerRadius(50)
+            .cornerRadius(30)
             .padding()
+           
        
         
     }
@@ -119,8 +133,8 @@ struct ChatsView: View {
     }
     
 }
-struct ChatsView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatsView()
-    }
-}
+//struct ChatsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ChatsView()
+//    }
+//}

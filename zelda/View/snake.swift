@@ -58,8 +58,66 @@ struct snake: View {
                     .frame(width: snakeSize, height: snakeSize)
                     .position(foodPos)
             }
-            
             if self.gameOver {
+                Rectangle()
+                    .fill(Color.white)
+                    .frame(width: 300, height: 280)
+                    .cornerRadius(20)
+                    .overlay(
+                VStack(spacing: 10){
+                    Text("Game Over")
+                        .font(.largeTitle)
+                        .foregroundColor(Color.black)
+                      //.padding(.bottom,110)
+                    Image("3")
+                        .resizable()
+                        .frame(width: 70, height: 100)
+                    HStack(spacing: 0){
+                        Text("Score \(posArray.count-1)")
+                        Image("red")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                    }
+                    
+                    
+                    //edit score on firebase
+                    HStack(spacing: 20){
+                        Rectangle()
+                            .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+                            .cornerRadius(15)
+                            .frame(width: 120, height: 48)
+                            .overlay(
+                                Text("New Game")
+                                    .font(.system(size: 13).bold())
+                            .foregroundColor(Color.white)
+                       ).onTapGesture {
+                            AppState.shared.gameID = UUID()
+                        }
+                        
+                        Rectangle()
+                            .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+                            .cornerRadius(15)
+                            .frame(width: 120, height: 48)
+                            .overlay(
+                                Text("Home")
+                            .font(.system(size: 13).bold())
+                            .foregroundColor(Color.white)
+                       ).onTapGesture {
+                            AppState.shared.gameID = UUID()
+                        }
+                       
+
+                    }
+                    .padding(.top)
+                    
+                    
+                    
+                    //add button to go back home
+                })
+                    .shadow(radius: 20)
+                
+            }
+           /* if self.gameOver {
                 VStack(spacing: 10){
                     Text("Game Over")
                         .font(.largeTitle)
@@ -70,7 +128,7 @@ struct snake: View {
                     }
                     //add button to go back home
                 }
-            }
+            }*/
         
                 }.onAppear(){
                     self.foodPos = changeRecPosition()

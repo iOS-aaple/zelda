@@ -57,11 +57,11 @@ struct Characters : View {
                                 Button(action : {
                                     
                                 }) {
-                                    Image("star")
+                                    Image("red")
                                         .resizable()
                                         .font(.title)
                                         .foregroundColor(.white)
-                                        .frame(width: 50, height: 30)
+                                        .frame(width: 30, height: 30)
                                         
                                 }
                                 Text("100")

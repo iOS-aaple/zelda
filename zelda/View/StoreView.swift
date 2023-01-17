@@ -26,6 +26,7 @@ struct StoreView_Previews: PreviewProvider {
     }
 }
 struct Characters : View {
+    @Environment(\.presentationMode) var present
     var body: some View {
 //        NavigationView {
             GeometryReader { geometry in
@@ -36,6 +37,16 @@ struct Characters : View {
                         .edgesIgnoringSafeArea(.all)
                     VStack {
                         HStack {
+                            Button(action : {
+                                // pop the view when back button pressed
+                                self.present.wrappedValue.dismiss()
+                            }) {
+                                Image(systemName: "chevron.left")
+                                    .font(.title)
+                                    .foregroundColor(.white)
+                            }
+                            Spacer()
+                            
                             Text("Zelda Store")
                                 .font(.title)
                                 .fontWeight(.bold)
@@ -59,7 +70,7 @@ struct Characters : View {
                             .padding(.trailing)
                         .background(Color(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393))
                         .cornerRadius(10)
-                        } // head bar
+                        } // head view
                         .padding(.horizontal)
                         .padding(.top)
                         ScrollView(.vertical, showsIndicators: false){
@@ -243,15 +254,6 @@ struct Detail : View {
                         .foregroundColor(.white)
                         .padding(.top)
                     HStack(spacing : 20){
-//                        Button(action : {
-//
-//                        }) {
-//                            Text("Add to Favourite")
-//                                .foregroundColor(.white)
-//                                .padding(.vertical)
-//                                .frame(width: (UIScreen.main.bounds.width / 2) - 30)
-//                                .background(Capsule().stroke(Color.white, lineWidth: 2))
-//                        }
                         Button(action : {
                             presentAlert = true
 

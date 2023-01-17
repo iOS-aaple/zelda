@@ -38,6 +38,7 @@
 		AF0DCE282973271B00186556 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0DCE272973271B00186556 /* HomeView.swift */; };
 		AF0DCE2A2973272F00186556 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0DCE292973272F00186556 /* StoreView.swift */; };
 		AF0DCE2C29733A9800186556 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF0DCE2B29733A9800186556 /* GoogleService-Info.plist */; };
+		AF3C0CC4297736C800E742CF /* XO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C0CC3297736C800E742CF /* XO.swift */; };
 		E44717F02973F29F00EA5834 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44717EF2973F29F00EA5834 /* AccountView.swift */; };
 		E4DCF50C29767C5B00FF02C8 /* PuzzleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DCF50B29767C5B00FF02C8 /* PuzzleView.swift */; };
 		E4DCF51029767D8600FF02C8 /* PuzzleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DCF50F29767D8600FF02C8 /* PuzzleModel.swift */; };
@@ -68,6 +69,7 @@
 		AF0DCE272973271B00186556 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeView.swift; path = zelda/View/Home/HomeView.swift; sourceTree = SOURCE_ROOT; };
 		AF0DCE292973272F00186556 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		AF0DCE2B29733A9800186556 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AF3C0CC3297736C800E742CF /* XO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XO.swift; sourceTree = "<group>"; };
 		E44717EF2973F29F00EA5834 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		E4DCF50B29767C5B00FF02C8 /* PuzzleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleView.swift; sourceTree = "<group>"; };
 		E4DCF50F29767D8600FF02C8 /* PuzzleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleModel.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				3F3A76EB2973002E002E0BB1 /* FrindsView */,
 				AFC2DDCB2976A90900C2073C /* Home */,
 				AF0DCE292973272F00186556 /* StoreView.swift */,
+				AF3C0CC3297736C800E742CF /* XO.swift */,
 				3F3A76B92972E55D002E0BB1 /* ContentView.swift */,
 				848A33A02975B8A6008D9957 /* snake.swift */,
 			);
@@ -316,6 +319,7 @@
 				E4DCF51029767D8600FF02C8 /* PuzzleModel.swift in Sources */,
 				848A33AB2976120A008D9957 /* Memory.swift in Sources */,
 				848A33A12975B8A6008D9957 /* snake.swift in Sources */,
+				AF3C0CC4297736C800E742CF /* XO.swift in Sources */,
 				848A33AD2976123D008D9957 /* CardView.swift in Sources */,
 				848A33AF2976128B008D9957 /* MemoryGameView.swift in Sources */,
 				AF0DCE282973271B00186556 /* HomeView.swift in Sources */,

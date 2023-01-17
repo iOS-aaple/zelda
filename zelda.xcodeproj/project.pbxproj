@@ -39,6 +39,9 @@
 		AF0DCE2A2973272F00186556 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0DCE292973272F00186556 /* StoreView.swift */; };
 		AF0DCE2C29733A9800186556 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF0DCE2B29733A9800186556 /* GoogleService-Info.plist */; };
 		E44717F02973F29F00EA5834 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44717EF2973F29F00EA5834 /* AccountView.swift */; };
+		E4DCF50C29767C5B00FF02C8 /* PuzzleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DCF50B29767C5B00FF02C8 /* PuzzleView.swift */; };
+		E4DCF51029767D8600FF02C8 /* PuzzleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DCF50F29767D8600FF02C8 /* PuzzleModel.swift */; };
+		E4DCF51229767DA500FF02C8 /* PuzzleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DCF51129767DA500FF02C8 /* PuzzleViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +69,9 @@
 		AF0DCE292973272F00186556 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		AF0DCE2B29733A9800186556 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E44717EF2973F29F00EA5834 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		E4DCF50B29767C5B00FF02C8 /* PuzzleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleView.swift; sourceTree = "<group>"; };
+		E4DCF50F29767D8600FF02C8 /* PuzzleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleModel.swift; sourceTree = "<group>"; };
+		E4DCF51129767DA500FF02C8 /* PuzzleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +156,7 @@
 		3F3A76E929730011002E0BB1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E4DCF50E29767D4900FF02C8 /* PuzzleGame */,
 				848A33A9297611D3008D9957 /* Matched Cards Game */,
 				3F0D6B9229747AA000F6B9A0 /* Login and SingUp View */,
 				3F3A76EB2973002E002E0BB1 /* FrindsView */,
@@ -189,6 +196,16 @@
 				848A33AE2976128B008D9957 /* MemoryGameView.swift */,
 			);
 			path = "Matched Cards Game";
+			sourceTree = "<group>";
+		};
+		E4DCF50E29767D4900FF02C8 /* PuzzleGame */ = {
+			isa = PBXGroup;
+			children = (
+				E4DCF50B29767C5B00FF02C8 /* PuzzleView.swift */,
+				E4DCF50F29767D8600FF02C8 /* PuzzleModel.swift */,
+				E4DCF51129767DA500FF02C8 /* PuzzleViewModel.swift */,
+			);
+			name = PuzzleGame;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,10 +300,12 @@
 				3FE963EB2974570A00E3E1CD /* login&signupView.swift in Sources */,
 				3F3A76ED29730047002E0BB1 /* FrindsView.swift in Sources */,
 				3F0D6B9429747AC400F6B9A0 /* Login.swift in Sources */,
+				E4DCF50C29767C5B00FF02C8 /* PuzzleView.swift in Sources */,
 				3F0D6B91297476A600F6B9A0 /* Title.swift in Sources */,
 				3F0D6B9629747B1400F6B9A0 /* SingUp.swift in Sources */,
 				3F0D6B9829747DF500F6B9A0 /* Users.swift in Sources */,
 				3F3A76BA2972E55D002E0BB1 /* ContentView.swift in Sources */,
+				E4DCF51029767D8600FF02C8 /* PuzzleModel.swift in Sources */,
 				848A33AB2976120A008D9957 /* Memory.swift in Sources */,
 				848A33A12975B8A6008D9957 /* snake.swift in Sources */,
 				848A33AD2976123D008D9957 /* CardView.swift in Sources */,
@@ -295,6 +314,7 @@
 				E44717F02973F29F00EA5834 /* AccountView.swift in Sources */,
 				3F0D6B8C2974761400F6B9A0 /* Messages.swift in Sources */,
 				3F0D6B8F2974767000F6B9A0 /* Cell.swift in Sources */,
+				E4DCF51229767DA500FF02C8 /* PuzzleViewModel.swift in Sources */,
 				AF0DCE2A2973272F00186556 /* StoreView.swift in Sources */,
 				3F3A76B82972E55D002E0BB1 /* zeldaApp.swift in Sources */,
 				3F0D6B9A29749CEC00F6B9A0 /* ForgotPassword.swift in Sources */,

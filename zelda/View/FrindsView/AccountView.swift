@@ -21,7 +21,7 @@ struct AccountView: View {
     @State var userID = "\(Auth.auth().currentUser!.uid)"
     @State var userInfo = [NSDictionary]()
     @StateObject private var user = Users()
-    
+    @Environment(\.presentationMode) var present
     
   
     var body: some View {
@@ -33,9 +33,20 @@ struct AccountView: View {
                     .resizable()
                     .aspectRatio(geometry.size, contentMode: .fill)
                     .edgesIgnoringSafeArea(.all)
-                VStack {
-                    infoView(playerName: $playerName, playerEmail: $playerEmail , playerPassword:  $playerPassword , isEditingeOn: $editingToggle, playerBirthDate: $playerBirthDate, playerCoins: $playerCoins,userId:$userID,user: user.user)
-                }.padding()
+                VStack{
+                    Button(action : {
+                        // pop the view when back button pressed
+                        self.present.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .font(.title)
+                            .foregroundColor(.white)
+                    } .padding(.horizontal, -180)
+                    VStack {
+                        infoView(playerName: $playerName, playerEmail: $playerEmail , playerPassword:  $playerPassword , isEditingeOn: $editingToggle, playerBirthDate: $playerBirthDate, playerCoins: $playerCoins,userId:$userID,user: user.user)
+                    }.padding()
+                }
+              
                 
             }
         }.onAppear{

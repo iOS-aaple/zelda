@@ -202,7 +202,7 @@ struct Detail : View {
                                 Button(action : {
                                     
                                 }) {
-                                    Image("star")
+                                    Image("red")
                                         .resizable()
                                         .font(.title)
                                         .foregroundColor(.white)
@@ -236,7 +236,7 @@ struct Detail : View {
                         Button(action : {
                             
                         }) {
-                            Image("star")
+                            Image("red")
                                 .resizable()
                                 .font(.title)
                                 .foregroundColor(.white)
@@ -249,28 +249,39 @@ struct Detail : View {
                     .padding(.trailing)
                 .background(Color(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393))
                 .cornerRadius(10)
-                    Text(self.data.description)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.white)
-                        .padding(.top)
+//                    Text("self.data.description")
+//                        .multilineTextAlignment(.center)
+//                        .foregroundColor(.white)
+//                        .padding(.top)
                     HStack(spacing : 20){
                         Button(action : {
                             presentAlert = true
 
                         }) {
-                            Text("Buy")
-                                .foregroundColor(.white)
-                                .padding(.vertical)
-                                .frame(width: (UIScreen.main.bounds.width / 2) - 30)
-                                .background(Capsule().stroke(Color.white, lineWidth: 2))
-                                .alert("are you sure to buy \(self.data.name)?", isPresented: $presentAlert, actions: {
-                                    // 1
-                                    Button("buy", role: .cancel, action: {})
-                                      Button("Cancel", role: .destructive, action: {})
-
+                           
+                            if self.data.id == 0 {
+                                Text(self.data.description)
+                                    .foregroundColor(.white)
+                                    .padding(.vertical)
+                                    .frame(width: (UIScreen.main.bounds.width / 2) - 30)
+                                    .background(Capsule().stroke(Color.white, lineWidth: 2))
+                                
+                            } else {
+                                Text(self.data.description)
+                                    .foregroundColor(.white)
+                                    .padding(.vertical)
+                                    .frame(width: (UIScreen.main.bounds.width / 2) - 30)
+                                    .background(Capsule().stroke(Color.white, lineWidth: 2))
+                                
+                                    .alert("are you sure to buy \(self.data.name)?", isPresented: $presentAlert, actions: {
+                                        // 1
+                                        Button("buy", role: .cancel, action: {})
+                                        Button("Cancel", role: .destructive, action: {})
+                                        
                                     }, message: {
-                                      Text("")
+                                        Text("")
                                     })
+                            }
                                 
                         }
                     }
@@ -292,8 +303,8 @@ struct Player : Identifiable {
     let price : Int
     let description : String
 }
-var data = [Player(id: 0, power: [0.2,0.5,0.9], image: "1", name: "Sherman", color: .clear, price: 500, description: ""),
-            Player(id: 1, power: [0.3,0.5,0.6], image: "luca", name: "Luca", color: .clear, price: 800, description: ""),
-            Player(id: 2, power: [0.7,0.5,1], image: "marty", name: "Marty", color: .clear, price: 1000, description: "")
+var data = [Player(id: 0, power: [0.2,0.5,0.9], image: "1", name: "Sherman", color: .clear, price: 0, description: "you already have it"),
+            Player(id: 1, power: [0.3,0.5,0.6], image: "luca", name: "Luca", color: .clear, price: 800, description: "buy"),
+            Player(id: 2, power: [0.7,0.5,1], image: "marty", name: "Marty", color: .clear, price: 1000, description: "buy")
 ]
 

@@ -19,9 +19,6 @@ struct HomeView_Previews: PreviewProvider {
     }
 }
 struct Home: View {
-//    @State var midY : CGFloat = 0
-//    @State var selectedTab = "person.3.sequence.fill"
-    
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -42,15 +39,17 @@ struct Home: View {
                                    Button(action : {
                                        
                                    }) {
-                                       Image("star")
+                                       Image("red")
                                            .resizable()
                                            .font(.title)
                                            .foregroundColor(.white)
-                                           .frame(width: 50, height: 30)
+                                           .frame(width: 20, height: 20)
                                            
                                    }
                                    Text("100")
+                                       .font(.system(size: 15))
                                        .foregroundColor(Color(red: 0.01332890149, green: 0.04810451716, blue:  0.1187042817))
+                                       
                                }
                                .padding(.trailing)
                            .background(Color(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393))
@@ -91,7 +90,7 @@ struct Home: View {
                               )
                                NavigationLink (
                                    destination :
-                                   AccountView()
+                                   AccountView().navigationBarBackButtonHidden(true)
                                    , label : {
                                        ButtonTabBar(image: Image(systemName: "person.crop.circle")) {}
                                    }
@@ -119,10 +118,10 @@ struct XO : View {
             HStack{
                 Image("XO")
                     .resizable()
-                    .frame(width: UIScreen.main.bounds.width / 3)
-                    .frame(width: 150, height: 150)
+                    .frame(width: UIScreen.main.bounds.width / 4)
+                    .frame(width: 50, height: 100)
                 Spacer()
-            } .padding(.leading, -20)
+            } .padding(.leading, 20)
             
             Text("XO")
                 .multilineTextAlignment(.center)
@@ -142,13 +141,13 @@ struct XO : View {
                             .padding(.horizontal, 25)
                             .background(Capsule().stroke(Color.white, lineWidth: 2))
                     }
-                    .offset(x: -20, y: -70)
+                    .offset(x: -20, y: -50)
                 }
                 
                
             }
         }
-        .frame(height: 290)
+        .frame(height: 200)
         .background(
             Color.white.opacity(0.2)
                 .cornerRadius(25)
@@ -159,20 +158,19 @@ struct XO : View {
                 .padding(.trailing, 25)
             )
         .padding(.horizontal)
+        .padding(.bottom, -90)
     }
 }
 struct ThePuzzle : View {
-//    var gamesData : HomeData
-//    let image : Image
     var body: some View {
         HStack {
             HStack{
                 Image("puzzle")
                     .resizable()
-                    .frame(width: UIScreen.main.bounds.width / 3)
-                    .frame(width: 150, height: 150)
+                    .frame(width: UIScreen.main.bounds.width / 4)
+                    .frame(width: 60, height: 100)
                 Spacer()
-            } .padding(.leading, -20)
+            } .padding(.leading, 20)
             
             Text("Puzzle")
                 .multilineTextAlignment(.center)
@@ -192,13 +190,13 @@ struct ThePuzzle : View {
                             .padding(.horizontal, 25)
                             .background(Capsule().stroke(Color.white, lineWidth: 2))
                     }
-                    .offset(x: -20, y: -70)
+                    .offset(x: -20, y: -50)
                 }
                 
                
             }
         }
-        .frame(height: 290)
+        .frame(height: 200)
         .background(
             Color.white.opacity(0.2)
                 .cornerRadius(25)
@@ -209,20 +207,22 @@ struct ThePuzzle : View {
                 .padding(.trailing, 25)
             )
         .padding(.horizontal)
+        .padding(.bottom, -90)
     }
 }
 struct Snake : View {
-//    var gamesData : HomeData
-//    let image : Image
+    @StateObject var appState = AppState.shared
     var body: some View {
+        
         HStack {
             HStack{
                 Image("snake")
                     .resizable()
                     .frame(width: UIScreen.main.bounds.width / 3)
-                    .frame(width: 150, height: 150)
+                    .frame(width: 180, height: 160)
+                    .rotation3DEffect(.init(degrees: 180), axis : (x:0, y: -1, z: 0))
                 Spacer()
-            } .padding(.leading, -20)
+            } .padding(.leading, -50)
             
             Text("Snake")
                 .multilineTextAlignment(.center)
@@ -234,7 +234,7 @@ struct Snake : View {
             VStack(spacing: 20){
                 Spacer(minLength: 0)
                 HStack{
-                    NavigationLink(destination: snake()) {
+                    NavigationLink(destination: snake().id(appState.gameID)) {
                         Text("Play")
                             .font(.caption)
                             .foregroundColor(.white)
@@ -242,13 +242,13 @@ struct Snake : View {
                             .padding(.horizontal, 25)
                             .background(Capsule().stroke(Color.white, lineWidth: 2))
                     }
-                    .offset(x: -20, y: -70)
+                    .offset(x: -20, y: -50)
                 }
                 
                
             }
         }
-        .frame(height: 290)
+        .frame(height: 200)
         .background(
             Color.white.opacity(0.2)
                 .cornerRadius(25)
@@ -259,6 +259,7 @@ struct Snake : View {
                 .padding(.trailing, 25)
             )
         .padding(.horizontal)
+        .padding(.bottom, 100)
     }
 }
 struct UniverseMemory : View {

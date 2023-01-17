@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MemoryGameView: View {
+    @StateObject private var vm = ViewModel()
+    
     private var fourColumnGrid = [GridItem(.flexible()),
                                   GridItem(.flexible()),
                                   GridItem(.flexible()),
@@ -19,14 +21,16 @@ struct MemoryGameView: View {
                                   GridItem(.flexible()),
                                   GridItem(.flexible()),
                                   GridItem(.flexible())]
-    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     @State var cards = createCardList().shuffled()
     @State var matchedCards = [GameCard]()
     @State var userChoices = [GameCard]()
-    @State var isGameOver = false
+    @State var winState = false
+    @State var loseState = false
     
     var body: some View {
+        NavigationView {
             GeometryReader { geo in
                         ZStack{
                             Image("background")
@@ -37,6 +41,9 @@ struct MemoryGameView: View {
                                 Text("Universe Memory")
                                     .foregroundColor(.white)
                                     .font(.largeTitle.monospaced().bold())
+                                Text("\(vm.time)")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 22))
                                 
                                 LazyVGrid(columns: fourColumnGrid, spacing: 20){
                                     ForEach (cards){ card in
@@ -69,33 +76,141 @@ struct MemoryGameView: View {
                                 .padding(.horizontal)
                             
                             //handel end of the game option
-                            if self.isGameOver {
-                                Rectangle()
-                                    .fill(Color.white)
-                                    .frame(width: 200, height: 200)
-                                    .overlay(
-                                VStack(spacing: 10){
-                                    Text("Game Over")
-                                        .font(.largeTitle)
-                                        .foregroundColor(Color.black)
+                            if vm.isGameOver{
+                                if self.winState {
+                                    Rectangle()
+                                        .fill(Color.white)
+                                        .frame(width: 320, height: 300)
+                                        .cornerRadius(20)
+                                        .overlay(
+                                            VStack(spacing: 10){
+                                                Text("You Win!!")
+                                                    .font(.largeTitle)
+                                                    .foregroundColor(Color.black)
+                                                //  .padding(.bottom,110)
+                                                Image("winCharacter")
+                                                    .resizable()
+                                                    .frame(width: 70, height: 100)
+                                                HStack(spacing: 0){
+                                                    Text("You got 12")
+                                                    Image("red")
+                                                        .resizable()
+                                                        .frame(width: 25, height: 25)
+                                                }
+                                                
+                                                
+                                                //edit score on firebase
+                                                HStack(spacing: 20){
+                                                    Rectangle()
+                                                        .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+                                                        .cornerRadius(15)
+                                                        .frame(width: 120, height: 48)
+                                                        .overlay(
+                                                            Text("New Game")
+                                                                .font(.system(size: 13).bold())
+                                                                .foregroundColor(Color.white)
+                                                        ).onTapGesture {
+                                                            AppState.shared.gameID = UUID()
+                                                        }
+                                                    
+                                                    Rectangle()
+                                                        .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+                                                        .cornerRadius(15)
+                                                        .frame(width: 120, height: 48)
+                                                        .overlay(
+                                                            Text("Home")
+                                                                .font(.system(size: 13).bold())
+                                                                .foregroundColor(Color.white)
+                                                        ).onTapGesture {
+                                                            AppState.shared.gameID = UUID()
+                                                        }
+                                                    
+                                                    
+                                                }
+                                                .padding(.top)
+                                                
+                                                //add button to go back home
+                                            })
+                                        .shadow(radius: 20)
+                                        .padding(.bottom, 700)
                                     
-                                    //edit score on firebase
-                                    Button(action:{AppState.shared.gameID = UUID()}){
-                                        Text("New Game")
-                                    }
-                                    //add button to go back home
-                                })
+                                } else if self.loseState {
+                                    Rectangle()
+                                        .fill(Color.white)
+                                        .frame(width: 320, height: 300)
+                                        .cornerRadius(20)
+                                        .overlay(
+                                            VStack(spacing: 10){
+                                                Text("Sorry you lose")
+                                                    .font(.largeTitle)
+                                                    .foregroundColor(Color.black)
+                                                //  .padding(.bottom,110)
+                                                Image("1")
+                                                    .resizable()
+                                                    .frame(width: 70, height: 100)
+                                                
+                                                Text("You can try again")
+                                                
+                                                //edit score on firebase
+                                                HStack(spacing: 20){
+                                                    Rectangle()
+                                                        .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+                                                        .cornerRadius(15)
+                                                        .frame(width: 120, height: 48)
+                                                        .overlay(
+                                                            Text("New Game")
+                                                                .font(.system(size: 13).bold())
+                                                                .foregroundColor(Color.white)
+                                                        ).onTapGesture {
+                                                            AppState.shared.gameID = UUID()
+                                                        }
+                                                    
+                                                    
+                                                            NavigationLink {
+                                                                HomeView()
+                                                            } label: {
+                                                                Rectangle()
+                                                                    .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+                                                                    .cornerRadius(15)
+                                                                    .frame(width: 120, height: 48)
+                                                                    .overlay(
+                                                                        Text("Home")
+                                                                            .font(.system(size: 13).bold())
+                                                                            .foregroundColor(Color.white)
+                                                                    )
+                                                                    .navigationBarBackButtonHidden(true)
+                                                                   // .navigationBarHidden(true)
+                                                                    .statusBar(hidden: true)
+                                                            }
+                                                            
+                                                }
+                                                .padding(.top)
+                                                
+                                            })
+                                        .shadow(radius: 20)
+                                        .padding(.bottom, 700)
+                                    
+                                }
                             }
                         }
-            }.onReceive(timer) { (_) in
+            }.onAppear(){
+                vm.start(min: vm.minuts)
+            }
+            .onReceive(timer) { (_) in
+                vm.updateCountdown()
                 gameOver()
             }
+            .navigationBarHidden(true)
+        }
+        .statusBar(hidden: true)
+            
            }
+    
     func gameOver(){
         if matchedCards.count == 24{
-            isGameOver = true
-            //alert to end of the game
-            
+            winState = true
+        } else if vm.isGameOver == true{
+            loseState = true
         }
     }
     }
@@ -106,3 +221,49 @@ struct MemoryGameView_Previews: PreviewProvider {
     }
 }
 
+
+extension MemoryGameView{
+    final class ViewModel: ObservableObject{
+        @Published var isActive = false
+        @Published var isGameOver = false
+        @Published var time = "1:00"
+        @Published var minuts: Float = 1.0{
+            didSet{
+                self.time = "\(Int(minuts)):00"
+            }
+        }
+        
+        private var initialTime = 0
+        private var endDate = Date()
+        
+        func start(min: Float){
+            self.initialTime = Int(min)
+            //self.endDate = Date()
+            self.isActive = true
+            self.endDate = Calendar.current.date(byAdding: .minute, value: Int(min), to: endDate)!
+            
+        }
+        
+        func updateCountdown(){
+            guard isActive else { return }
+            
+            let now = Date()
+            let diff = endDate.timeIntervalSince1970 - now.timeIntervalSince1970
+            
+            if diff <= 0{
+                self.isActive = false
+                self.time = "0:00"
+                self.isGameOver = true
+                return
+            }
+            
+            let date = Date(timeIntervalSince1970: diff)
+            let calender = Calendar.current
+            let minutes = calender.component(.minute, from: date)
+            let seconds = calender.component(.second, from: date)
+            
+            self.minuts = Float(minutes)
+            self.time = String(format: "%d:%02d", minutes, seconds)
+        }
+    }
+}

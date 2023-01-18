@@ -166,7 +166,7 @@ struct infoView : View {
                         .foregroundColor(Color.red)
                         .cornerRadius(8)
                 } .fullScreenCover(isPresented: $successLogout) {
-                    ContentView()
+                    ContentView(score: Int())
                 }
                 
             }.padding(30)

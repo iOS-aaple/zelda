@@ -50,6 +50,7 @@ struct Moves : View {
     @State var moves = ["","","","","","","","",""]
     @State var endGame = "Tic Tac Toe"
     @State var gameEnded = false
+    @State var score : Int
     var ranges = [(0..<3),(3..<6),(6..<9)]
     var body: some View {
         NavigationView{
@@ -68,10 +69,10 @@ struct Moves : View {
                                     .resizable()
                                     .font(.title)
                                     .foregroundColor(.white)
-                                    .frame(width: 30, height: 30)
+                                    .frame(width: 20, height: 20)
                                 
                             }
-                            Text("100")
+                            Text("\(score)")
                                 .foregroundColor(Color(red: 0.01332890149, green: 0.04810451716, blue:  0.1187042817))
                         }
                         .padding(.trailing)
@@ -113,7 +114,7 @@ struct Moves : View {
                                     .background(Capsule().stroke(Color.white, lineWidth: 2))
                                 
                             })
-                            NavigationLink(destination: HomeView()) {
+                            NavigationLink(destination: HomeView(score: score)) {
                                 Text("Home")
                                     .font(.system(size: 15))
                                     .foregroundColor(.white)
@@ -142,6 +143,9 @@ struct Moves : View {
             if checkWinner(list: moves, letter: letter) {
                 endGame = "\(letter) has won!"
                 gameEnded = true
+                if letter == "X" {
+                    score += 100
+                }
                 break
             }
         }
@@ -182,6 +186,6 @@ func checkWinner(list: [String], letter: String) -> Bool{
 
 struct XO_Previews: PreviewProvider {
     static var previews: some View {
-        Moves()
+        Moves(score: Int())
     }
 }

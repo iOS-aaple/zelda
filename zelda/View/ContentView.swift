@@ -11,6 +11,7 @@ import Firebase
 
 struct ContentView: View {
     @State var showHomeView = false
+    @State var score : Int
     var body: some View {
        Login_signupView()
             .onAppear{
@@ -21,7 +22,7 @@ struct ContentView: View {
                 }
             }
             .fullScreenCover(isPresented: $showHomeView) {
-                HomeView()
+                HomeView(score: score)
             }
         
     }
@@ -29,7 +30,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(score: Int())
     }
 }
 

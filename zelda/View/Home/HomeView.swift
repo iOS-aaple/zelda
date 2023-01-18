@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State var score : Int
     var body: some View {
-        Home()
+        Home(score: $score)
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(score: Int())
     }
 }
 struct Home: View {
+    @Binding var score : Int
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -46,7 +48,7 @@ struct Home: View {
                                            .frame(width: 20, height: 20)
                                            
                                    }
-                                   Text("100")
+                                   Text("\(score)")
                                        .font(.system(size: 15))
                                        .foregroundColor(Color(red: 0.01332890149, green: 0.04810451716, blue:  0.1187042817))
                                        
@@ -64,9 +66,10 @@ struct Home: View {
                                    ForEach(games) { i in
 //                                       GamesCards(gamesData: i)
                                    }
-                                   XO()
+                                   XO(score: score)
                                    ThePuzzle()
                                    Snake()
+                                   UniverseMemory()
                                    .padding(.bottom, -50)
                                    }
                            }
@@ -83,7 +86,7 @@ struct Home: View {
                               )
                                NavigationLink (
                                    destination :
-                                    StoreView().navigationBarBackButtonHidden(true)
+                                    StoreView(score: score).navigationBarBackButtonHidden(true)
                                    , label : {
                                        ButtonTabBar(image: Image("shop")) {}
                                    }
@@ -113,6 +116,7 @@ struct Home: View {
 }
 
 struct XO : View {
+    @State var score : Int
     var body: some View {
         HStack {
             HStack{
@@ -123,9 +127,9 @@ struct XO : View {
                 Spacer()
             } .padding(.leading, 20)
             
-            Text("XO")
+            Text("Tic Tac Toe")
                 .multilineTextAlignment(.center)
-                .font(.system(size: 30, design: .monospaced))
+                .font(.system(size: 25, design: .monospaced))
                 .frame(maxWidth: 200)
                 .padding(.horizontal)
                 .shadow(color: Color.black.opacity(0.9), radius: 8, x: 2, y: 6)
@@ -133,7 +137,7 @@ struct XO : View {
             VStack(spacing: 20){
                 Spacer(minLength: 0)
                 HStack{
-                    NavigationLink(destination: {}) {
+                    NavigationLink(destination: Moves(score: score)) {
                         Text("Play")
                             .font(.caption)
                             .foregroundColor(.white)
@@ -174,7 +178,7 @@ struct ThePuzzle : View {
             
             Text("Puzzle")
                 .multilineTextAlignment(.center)
-                .font(.system(size: 30, design: .monospaced))
+                .font(.system(size: 25, design: .monospaced))
                 .frame(maxWidth: 200)
                 .padding(.horizontal)
                 .shadow(color: Color.black.opacity(0.9), radius: 8, x: 2, y: 6)
@@ -226,7 +230,7 @@ struct Snake : View {
             
             Text("Snake")
                 .multilineTextAlignment(.center)
-                .font(.system(size: 30, design: .monospaced))
+                .font(.system(size: 25, design: .monospaced))
                 .frame(maxWidth: 200)
                 .padding(.horizontal)
                 .shadow(color: Color.black.opacity(0.9), radius: 8, x: 2, y: 6)
@@ -259,7 +263,7 @@ struct Snake : View {
                 .padding(.trailing, 25)
             )
         .padding(.horizontal)
-        .padding(.bottom, 100)
+        .padding(.bottom, -90)
     }
 }
 struct UniverseMemory : View {
@@ -268,16 +272,16 @@ struct UniverseMemory : View {
     var body: some View {
         HStack {
             HStack{
-                Image("")
+                Image("universe")
                     .resizable()
-                    .frame(width: UIScreen.main.bounds.width / 3)
-                    .frame(width: 150, height: 150)
+                    .frame(width: UIScreen.main.bounds.width / 4)
+                    .frame(width: 60, height: 80)
                 Spacer()
-            } .padding(.leading, -20)
+            } .padding(.leading, 20)
             
             Text("Universe Memory")
                 .multilineTextAlignment(.center)
-                .font(.system(size: 30, design: .monospaced))
+                .font(.system(size: 25, design: .monospaced))
                 .frame(maxWidth: 200)
                 .padding(.horizontal)
                 .shadow(color: Color.black.opacity(0.9), radius: 8, x: 2, y: 6)
@@ -285,7 +289,7 @@ struct UniverseMemory : View {
             VStack(spacing: 20){
                 Spacer(minLength: 0)
                 HStack{
-                    NavigationLink(destination: {}) {
+                    NavigationLink(destination: MemoryGameView()) {
                         Text("Play")
                             .font(.caption)
                             .foregroundColor(.white)
@@ -293,13 +297,13 @@ struct UniverseMemory : View {
                             .padding(.horizontal, 25)
                             .background(Capsule().stroke(Color.white, lineWidth: 2))
                     }
-                    .offset(x: -20, y: -70)
+                    .offset(x: -20, y: -50)
                 }
                 
                
             }
         }
-        .frame(height: 290)
+        .frame(height: 200)
         .background(
             Color.white.opacity(0.2)
                 .cornerRadius(25)
@@ -310,6 +314,7 @@ struct UniverseMemory : View {
                 .padding(.trailing, 25)
             )
         .padding(.horizontal)
+        .padding(.bottom, -90)
     }
 }
 struct HomeData : Identifiable{

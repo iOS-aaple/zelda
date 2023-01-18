@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct StoreView: View {
+    @State var score : Int
     var body: some View {
         NavigationView{
-            Characters()
+            Characters( score: self.score)
                 .navigationBarTitle("", displayMode: .inline)
                 .navigationBarHidden(true)
                 .navigationBarBackButtonHidden(true)
@@ -22,11 +23,12 @@ struct StoreView: View {
 
 struct StoreView_Previews: PreviewProvider {
     static var previews: some View {
-        StoreView()
+        StoreView(score: Int())
     }
 }
 struct Characters : View {
     @Environment(\.presentationMode) var present
+    @State var score : Int
     var body: some View {
 //        NavigationView {
             GeometryReader { geometry in
@@ -61,10 +63,10 @@ struct Characters : View {
                                         .resizable()
                                         .font(.title)
                                         .foregroundColor(.white)
-                                        .frame(width: 30, height: 30)
+                                        .frame(width: 20, height: 20)
                                         
                                 }
-                                Text("100")
+                                Text("\(score)")
                                     .foregroundColor(Color(red: 0.01332890149, green: 0.04810451716, blue:  0.1187042817))
                             }
                             .padding(.trailing)
@@ -76,7 +78,7 @@ struct Characters : View {
                         ScrollView(.vertical, showsIndicators: false){
                             VStack(spacing: 10) {
                                 ForEach(data){ i in
-                                    Card(data: i)
+                                    Card(data: i, score: score)
                                 }
                             }
                             .padding(.bottom)
@@ -91,6 +93,7 @@ struct Characters : View {
 }
 struct Card : View {
     var data : Player
+    @State var score : Int
     var body: some View {
         HStack {
             Image(self.data.image)
@@ -143,7 +146,7 @@ struct Card : View {
                     )
                     .clipShape(Circle())
                 Spacer(minLength: 0)
-                NavigationLink(destination: Detail(data: self.data)) {
+                NavigationLink(destination: Detail(data: self.data, score: score)) {
                     Text("See Details")
                         .font(.caption)
                         .foregroundColor(.white)
@@ -173,6 +176,7 @@ struct Card : View {
 struct Detail : View {
     @State private var presentAlert = false
     var data : Player
+    @State var score : Int
     // used to pop the top most view on stack
     @Environment(\.presentationMode) var present
     var body: some View {
@@ -206,10 +210,10 @@ struct Detail : View {
                                         .resizable()
                                         .font(.title)
                                         .foregroundColor(.white)
-                                        .frame(width: 50, height: 30)
+                                        .frame(width: 20, height: 20)
                                         
                                 }
-                                Text("100")
+                                Text("\(score)")
                                     .foregroundColor(Color(red: 0.01332890149, green: 0.04810451716, blue:  0.1187042817))
                             }
                             .padding(.trailing)
@@ -240,7 +244,7 @@ struct Detail : View {
                                 .resizable()
                                 .font(.title)
                                 .foregroundColor(.white)
-                                .frame(width: 50, height: 30)
+                                .frame(width: 30, height: 30)
                                 
                         }
                         Text("\(self.data.price)")
@@ -274,8 +278,14 @@ struct Detail : View {
                                     .background(Capsule().stroke(Color.white, lineWidth: 2))
                                 
                                     .alert("are you sure to buy \(self.data.name)?", isPresented: $presentAlert, actions: {
-                                        // 1
-                                        Button("buy", role: .cancel, action: {})
+                                        
+                                        Button("buy", role: .cancel, action: {
+                                            if score < self.data.price {
+                                                
+                                            } else {
+                                                score -= self.data.price
+                                            }
+                                        })
                                         Button("Cancel", role: .destructive, action: {})
                                         
                                     }, message: {

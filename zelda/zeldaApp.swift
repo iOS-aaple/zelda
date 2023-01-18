@@ -53,7 +53,7 @@ struct zeldaApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView( score: Int())
            // snake().id(appState.gameID)
             
         }

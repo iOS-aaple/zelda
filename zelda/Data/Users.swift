@@ -19,7 +19,6 @@ class Users : ObservableObject {
     
     init(){
         getAllUsers()
-        //getUserInfo(userID: Auth.auth().currentUser?.uid ?? "")
         getUserInfo()
     }
     
@@ -32,11 +31,8 @@ class Users : ObservableObject {
             } else {
                 
                 let dbRef: DatabaseReference!
-                dbRef = Database.database().reference().child("Users").child("\(authrize!.user.uid)")
-                dbRef.setValue(["fullName":name,"email":email,"password":password])
-                
-                
-                
+                    dbRef = Database.database().reference().child("Users").child("\(authrize!.user.uid)")
+                    dbRef.setValue(["fullName":name,"email":email,"password":password])
             }
         }
     }

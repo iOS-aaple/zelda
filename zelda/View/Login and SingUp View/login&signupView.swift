@@ -12,6 +12,7 @@ import FirebaseAuth
 import FirebaseStorage
 import FirebaseDatabase
 import GoogleSignInSwift
+
 struct Login_signupView: View {
     var body: some View {
         
@@ -29,6 +30,7 @@ struct login_signupView_Previews: PreviewProvider {
 struct Login_signupHomeView : View {
     
     @State var index = 0
+    
     var body: some View{
         
         NavigationView{
@@ -98,6 +100,8 @@ struct Login_signupHomeView : View {
         }
     }
     
+    // MARK: - Login By Google
+    
     func loginUsingGoogle(){
         
            guard let clientID = FirebaseApp.app()?.options.clientID else { return }
@@ -157,7 +161,7 @@ struct Login_signupHomeView : View {
             
             }// send sendData
     
-}
+} // Login_signupHomeView() 
 
 
 struct CShapeLogin : Shape {

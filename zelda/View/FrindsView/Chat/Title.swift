@@ -33,7 +33,7 @@ struct Title: View {
 //                ProgressView()
 //            }
             VStack {
-                Image("1")
+                Image("\(user.profileImage)")
                     .resizable()
                     .frame(width: 60 , height: 60)
                     .padding(.leading , 40)

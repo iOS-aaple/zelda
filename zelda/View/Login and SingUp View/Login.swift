@@ -11,6 +11,7 @@ import FirebaseDatabase
 import Firebase
 struct Login : View {
     
+    //MARK: STATES
     @State var email = ""
     @State var pass = ""
     @Binding var index : Int
@@ -18,6 +19,7 @@ struct Login : View {
     @State var errorMessage = String()
     @State var forgotPassword = false
     @State var showForgotPasswordScreen = false
+    
     var body: some View{
         
         ZStack(alignment: .bottom) {
@@ -76,14 +78,7 @@ struct Login : View {
                     
                     Spacer(minLength: 0)
                     
-//                    NavigationLink(destination: ForgotPassword() ){
-//                        Text("Forget Password?")
-//                           .foregroundColor(Color.white.opacity(1))
-//                    }
-
-                    
                     Button(action: {
-//                        login(email: self.email, passowrd: self.pass)
                         showForgotPasswordScreen.toggle()
 
                     },label: {
@@ -154,14 +149,9 @@ struct Login : View {
                 if err != nil {
                     errorMessage = "\(err!.localizedDescription)"
                     showErrorMessage = true
-                    print("🔴")
-                    
-                } else{
-                    print("🟢")
-                    print("loged in")
-                    
                 }
             }
-        }}
+        }
+    }
 }
 

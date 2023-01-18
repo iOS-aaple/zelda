@@ -1,23 +1,18 @@
 //
-//  ContentView.swift
+//  SplashScreen.swift
 //  zelda
 //
-//  Created by Aamer Essa on 14/01/2023.
+//  Created by Aamer Essa on 19/01/2023.
 //
 
 import SwiftUI
-import FirebaseAuth
-import Firebase
-import FBSDKCoreKit
 
-struct ContentView: View {
-    @State var showHomeView = false
-    @State private var isActive = false
-    @State private var size = 0.8
-    @State private var opacity = 0.1
-    var body: some View {
-        
-        if !isActive {
+struct SplashScreen: View {
+  
+        @State private var isActive = false
+        @State private var size = 0.8
+        @State private var opacity = 0.1
+        var body: some View {
             
             ZStack{
               
@@ -65,41 +60,20 @@ struct ContentView: View {
             }
             .background(Color(red: 21/255, green: 51/255, blue: 88/255)).ignoresSafeArea(.all)
             .onAppear{
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
                     withAnimation {
                         self.isActive = true
                     }
                     
                 }
             }
-            
-        } else {
-            
-            Login_signupView()
-                .onAppear{
-                    Auth.auth().addStateDidChangeListener { auth, user in
-                        if user != nil {
-                            guard let userID = user?.uid else { return }
-                            DBModel.curentUserID = userID
-                            showHomeView = true
-                        }
-                    }
-                    
-                }
-                .fullScreenCover(isPresented: $showHomeView) {
-                    HomeView()
-                }
-            
-                .onOpenURL(perform: { url in
-                    ApplicationDelegate.shared.application(UIApplication.shared, open:url, sourceApplication: nil, annotation: UIApplication.OpenURLOptionsKey.annotation)
-                })
+              
         }
-    }
+    
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct SplashScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        SplashScreen()
     }
 }
-

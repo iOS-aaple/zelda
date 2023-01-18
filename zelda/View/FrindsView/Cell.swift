@@ -10,6 +10,7 @@ import SwiftUI
 struct Cell: View {
      
     @State var user : User
+  
     var body: some View {
         
         HStack{
@@ -36,9 +37,3 @@ struct Cell: View {
     }
 }
 
-
-//struct Cell_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Cell()
-//    }
-//}

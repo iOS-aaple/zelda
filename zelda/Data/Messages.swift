@@ -18,24 +18,28 @@ class Messages:ObservableObject  {
     @Published var lastMessageId : String = ""
     @Published var chatID : String = ""
     let receiverUser : User?
+    
+    
     init(receiverUser:User){
         self.receiverUser = receiverUser
-        getMessage()
+     
     }
+    
+    
      func sendMessage(text:String,senderID:String,chatID:String,receiverID:String){
         
         
       let dbRef : DatabaseReference!
-        dbRef = Database.database().reference().child("Chats").child("\(UUID())").child("Messages").child("\(UUID())")
+         dbRef = Database.database().reference().child("Chats").child("\(self.chatID)").child("Messages").child("\(UUID())")
           dbRef.updateChildValues(["text":text,"senderID":senderID,"receiverID":receiverID,"time":"\(Date())"])
     
     }
     
      func getMessage(){
-        
+      
         
         let dbRef: DatabaseReference!
-         dbRef = Database.database().reference().child("Chats").child("\(receiverUser!.id)\(Auth.auth().currentUser!.uid)").child("Messages")
+         dbRef = Database.database().reference().child("Chats").child("\(self.chatID)").child("Messages")
             dbRef.observe(.childAdded) { dataSnapshot, err in
             
             if let allMessages = dataSnapshot.value as? NSDictionary {
@@ -54,6 +58,48 @@ class Messages:ObservableObject  {
            
         }
         
+    }
+    
+    func check()   {
+        
+        var chatId = String()
+        let chatDBref: DatabaseReference!
+            chatDBref = Database.database().reference().child("Chats")
+            chatDBref.observe(.value) { dataSnapshot , err in
+            
+                if let allChat = dataSnapshot.value as? NSDictionary {
+                    DispatchQueue.main.async {
+                        
+                        
+                        let allChatID = allChat.allKeys as! [String]
+                        
+                        for chat_ID in allChatID {
+                            
+                            let chatIDCOntent = chat_ID.split(separator: " ")
+                           
+                            if chatIDCOntent[0] == self.receiverUser!.id || chatIDCOntent[0] == Auth.auth().currentUser!.uid{
+                                
+                                if chatIDCOntent[1] == self.receiverUser!.id || chatIDCOntent[1] == Auth.auth().currentUser!.uid{
+                                    
+                                    self.chatID = chat_ID
+                                    chatId = chat_ID
+                                    self.message.removeAll()
+                                    self.getMessage()
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+                
+                if chatId == "" {
+                 
+                    self.chatID = "\(self.receiverUser!.id) \(Auth.auth().currentUser!.uid)"
+                    self.message.removeAll()
+                    self.getMessage()
+                }
+                
+        }
     }
 }
 

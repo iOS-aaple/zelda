@@ -146,11 +146,11 @@ struct Login_signupHomeView : View {
                 print("\(error!.localizedDescription)")
             } else {
                 
-                let user = User(id: authResult!.user.uid, name: userName,email: userEmail, password: userPassword, profileImage: "1",jewelry:100)
+                let user = User(id: authResult!.user.uid, name: userName,email: userEmail, password: userPassword, profileImage: "1",jewelry:50)
                     
                     var dbRef : DatabaseReference!
                         dbRef = Database.database().reference().child("Users").child("\(authResult!.user.uid)")
-                        dbRef.setValue(["fullName":user.name,"email":user.email,"password":user.password,"profileImage":user.profileImage])
+                dbRef.setValue(["fullName":user.name,"email":user.email,"password":user.password,"profileImage":user.profileImage,"jewelry":user.jewelry])
                 
                     }
                 }//end Auth

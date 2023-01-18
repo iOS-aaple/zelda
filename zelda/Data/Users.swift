@@ -54,11 +54,11 @@ class Users : ObservableObject {
                     print("error")
                 } else {
                     if let user = resualt.value as? NSDictionary {
-                                                let newUser = User(id: userID, name: user["fullName"] as! String, email: user["email"] as! String, password: user["password"] as! String, profileImage: user["profileImage"] as! String, jewelry: 100)
                         
+                        let newUser = User(id: userID, name: user["fullName"] as! String, email: user["email"] as! String, password: user["password"] as! String, profileImage: user["profileImage"] as! String, jewelry: user["jewelry"] as! Int)
                         
                         self.user = newUser
-                        print(self.user)
+                       
                         
                     }
                     
@@ -69,21 +69,25 @@ class Users : ObservableObject {
     }
     
     func getAllUsers(){
-        
-        let dbRef: DatabaseReference!
+        if Auth.auth().currentUser != nil {
+            let dbRef: DatabaseReference!
             dbRef = Database.database().reference().child("Users")
             dbRef.observe(.value) { users, err in
-            
+                
                 if let allUsers = users.value as? NSDictionary {
                     for user in allUsers {
-                        let userInfo = user.value as? NSDictionary
-                        
-                        let newUser = User(id: "\(user.key)", name: userInfo!["fullName"] as! String, email: userInfo!["email"] as! String, password: userInfo!["password"] as! String, profileImage: "1", jewelry: 100)
-                        
-                        self.users.append(newUser)
+                        if "\(user.key)" != Auth.auth().currentUser!.uid{
+                            let userInfo = user.value as? NSDictionary
+                            
+                            let newUser = User(id: "\(user.key)", name: userInfo!["fullName"] as! String, email: userInfo!["email"] as! String, password: userInfo!["password"] as! String, profileImage: userInfo!["profileImage"] as! String, jewelry: userInfo!["jewelry"] as! Int )
+                            
+                            self.users.append(newUser)
+                        }
                     }
                 }
+            }
         }
+        
     }
 }
 

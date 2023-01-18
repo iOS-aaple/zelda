@@ -10,17 +10,42 @@ import SwiftUI
 struct FrindsView: View {
     
     @ObservedObject var usersManger = Users()
+    @State var showChatView = false
+    @Environment(\.presentationMode) var present
+  
     var body: some View {
         NavigationView {
-    
+           
             ZStack{
                 Image("background")
                     .resizable()
                     .edgesIgnoringSafeArea(.all)
                 VStack{
+                    VStack{
+                        HStack {
+                            Button(action : {
+                                self.present.wrappedValue.dismiss()
+                            }) {
+                                Image(systemName: "chevron.left")
+                                    .font(.title)
+                                    .foregroundColor(.white)
+                            }
+                            Spacer()
+                            
+                            Text("Zelda Player")
+                                .font(.title)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                            
+                            Spacer()
+                        }.padding()
+                        
+                } .background(.thinMaterial)
                     
                     List{
-                        ForEach(usersManger.users){ user in
+                        
+                        ForEach(usersManger.users){ user  in
+                          
                             NavigationLink(destination: ChatsView(resUser: user, messagesManger: Messages(receiverUser: user)) ){
                                 Cell(user: user)
                             }
@@ -28,10 +53,15 @@ struct FrindsView: View {
                         }.listRowBackground(Color.clear)
                     }.background(.clear)
                         .scrollContentBackground(.hidden)
+                    
                 }
                
+                
             }
+           
         }
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

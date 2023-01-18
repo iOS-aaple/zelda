@@ -47,8 +47,8 @@ struct ChatsView: View {
                 .navigationBarHidden(true)
         }
         .onAppear{
-            messagesManger.chatID = "\(resUser.id)\(Auth.auth().currentUser!.uid)"
-            print(messagesManger.chatID)
+
+                messagesManger.check()
         }
         .background(  Image("background")
                                     .resizable()
@@ -61,7 +61,7 @@ struct ChatsView: View {
         
         
         ForEach(messagesManger.message){ message in
-            let isReceived = message.resivserID == resUser.id
+            let isReceived = message.senderID == resUser.id
             VStack(alignment: isReceived ?.leading : .trailing){
 
                 messageBubble(text: message.text, isResived: isReceived,messageTime: message.time)

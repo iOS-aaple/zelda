@@ -164,6 +164,7 @@
 				3F3A76EB2973002E002E0BB1 /* FrindsView */,
 				AFC2DDCB2976A90900C2073C /* Home */,
 				AF0DCE292973272F00186556 /* StoreView.swift */,
+				E44717EF2973F29F00EA5834 /* AccountView.swift */,
 				AF3C0CC3297736C800E742CF /* XO.swift */,
 				3F3A76B92972E55D002E0BB1 /* ContentView.swift */,
 				848A33A02975B8A6008D9957 /* snake.swift */,
@@ -186,7 +187,6 @@
 				3F0D6B8D2974765E00F6B9A0 /* Chat */,
 				3F3A76EC29730047002E0BB1 /* FrindsView.swift */,
 				3F0D6B8E2974767000F6B9A0 /* Cell.swift */,
-				E44717EF2973F29F00EA5834 /* AccountView.swift */,
 			);
 			path = FrindsView;
 			sourceTree = "<group>";

@@ -182,7 +182,7 @@ struct SignUP : View {
                 
                 let dbRef: DatabaseReference!
                 dbRef = Database.database().reference().child("Users").child("\(authrize!.user.uid)")
-                dbRef.setValue(["fullName":name,"email":email,"password":password])
+                dbRef.setValue(["fullName":name,"email":email,"password":password,"profileImage":"1","jewelry":100])
                 
                 
             }
@@ -192,8 +192,4 @@ struct SignUP : View {
     }
     
 }
-//struct SingUp_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SingUp()
-//    }
-//}
+

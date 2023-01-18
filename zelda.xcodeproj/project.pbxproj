@@ -40,6 +40,7 @@
 		AF0DCE2C29733A9800186556 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF0DCE2B29733A9800186556 /* GoogleService-Info.plist */; };
 		AF3C0CC4297736C800E742CF /* XO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C0CC3297736C800E742CF /* XO.swift */; };
 		AF80AC9229783F3E00F7279B /* FacebookLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80AC9129783F3E00F7279B /* FacebookLogin.swift */; };
+		AF80AC962978874800F7279B /* HomeGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80AC952978874800F7279B /* HomeGames.swift */; };
 		E44717F02973F29F00EA5834 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44717EF2973F29F00EA5834 /* AccountView.swift */; };
 		E4DCF50C29767C5B00FF02C8 /* PuzzleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DCF50B29767C5B00FF02C8 /* PuzzleView.swift */; };
 		E4DCF51029767D8600FF02C8 /* PuzzleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DCF50F29767D8600FF02C8 /* PuzzleModel.swift */; };
@@ -72,6 +73,7 @@
 		AF0DCE2B29733A9800186556 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AF3C0CC3297736C800E742CF /* XO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XO.swift; sourceTree = "<group>"; };
 		AF80AC9129783F3E00F7279B /* FacebookLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLogin.swift; sourceTree = "<group>"; };
+		AF80AC952978874800F7279B /* HomeGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGames.swift; sourceTree = "<group>"; };
 		E44717EF2973F29F00EA5834 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		E4DCF50B29767C5B00FF02C8 /* PuzzleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleView.swift; sourceTree = "<group>"; };
 		E4DCF50F29767D8600FF02C8 /* PuzzleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleModel.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				AF0DCE272973271B00186556 /* HomeView.swift */,
+				AF80AC952978874800F7279B /* HomeGames.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				3FE963EB2974570A00E3E1CD /* login&signupView.swift in Sources */,
 				3F3A76ED29730047002E0BB1 /* FrindsView.swift in Sources */,
 				3F0D6B9429747AC400F6B9A0 /* Login.swift in Sources */,
+				AF80AC962978874800F7279B /* HomeGames.swift in Sources */,
 				E4DCF50C29767C5B00FF02C8 /* PuzzleView.swift in Sources */,
 				3F0D6B91297476A600F6B9A0 /* Title.swift in Sources */,
 				3F0D6B9629747B1400F6B9A0 /* SingUp.swift in Sources */,

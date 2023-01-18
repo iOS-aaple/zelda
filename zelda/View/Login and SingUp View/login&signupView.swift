@@ -29,6 +29,9 @@ struct login_signupView_Previews: PreviewProvider {
 }
 
 struct Login_signupHomeView : View {
+    @AppStorage("logged") var logged = false
+    @AppStorage("email") var email = ""
+    @State var manager = LoginManager()
     @State var index = 0
     
     var body: some View{
@@ -68,7 +71,28 @@ struct Login_signupHomeView : View {
                     HStack(spacing: 30){
                         
                         Button(action: {
-                           
+                            if logged {
+                                manager.logOut()
+                                email = ""
+                                logged = false
+                            }else {
+                                manager.logIn(permissions: ["public_profile","email"], from: nil) { error , result in
+                                    if error != nil {
+                                        print(error)
+                                        return
+                                    }
+                                    // logged success
+                                    logged = true
+                                    // getting user details using facebook graph request
+                                    let request = GraphRequest(graphPath: "me", parameters : ["fields": "email"])
+                                    request.start{ ( _, res, _) in
+                                        guard let profileData = res as? [String : Any ] else { return }
+                                        
+                                        //saving email
+                                        email = profileData["email"] as! String
+                                    }
+                                }
+                            }
                            
                         }) {
                             

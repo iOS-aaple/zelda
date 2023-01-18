@@ -8,16 +8,24 @@
 import SwiftUI
 
 struct StoreView: View {
+    @State var userJewerly = 0
     var body: some View {
         NavigationView{
-            Characters()
+            Characters(userJewerly: $userJewerly).onAppear(){
+                fetchJewerly()
+            }
                 .navigationBarTitle("", displayMode: .inline)
                 .navigationBarHidden(true)
                 .navigationBarBackButtonHidden(true)
         }
         
-        
     }
+    func fetchJewerly(){
+        DBModel.shared.getUserInfo(id: DBModel.curentUserID) { user in
+            userJewerly = user.jewelry
+        }
+    }
+    
 }
 
 struct StoreView_Previews: PreviewProvider {
@@ -27,6 +35,8 @@ struct StoreView_Previews: PreviewProvider {
 }
 struct Characters : View {
     @Environment(\.presentationMode) var present
+    @Binding var userJewerly: Int
+
     var body: some View {
 //        NavigationView {
             GeometryReader { geometry in
@@ -64,7 +74,7 @@ struct Characters : View {
                                         .frame(width: 30, height: 30)
                                         
                                 }
-                                Text("100")
+                                Text("\(userJewerly)")
                                     .foregroundColor(Color(red: 0.01332890149, green: 0.04810451716, blue:  0.1187042817))
                             }
                             .padding(.trailing)

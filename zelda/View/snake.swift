@@ -31,143 +31,140 @@ struct snake: View {
 
     //MARK: - View
     var body: some View {
-        ZStack{
-            Image("background")
-                .resizable()
-                .ignoresSafeArea()
-            ZStack{
-                Rectangle()
-                    .foregroundColor(Color(red: 213/255, green: 213/255, blue: 245/255))
-                    .cornerRadius(20)
-                    .padding(.top, UIScreen.main.bounds.minY + 80)
-                    .padding(.bottom, UIScreen.main.bounds.maxY - 800)
-                    .padding(.leading, UIScreen.main.bounds.minX + 23)
-                    .padding(.trailing, UIScreen.main.bounds.maxX - 370)
-            }
-            .cornerRadius(30)
+        NavigationView {
             
             ZStack{
-                ForEach(0..<posArray.count, id:\.self){ index in
-                    //snake
+                Image("background")
+                    .resizable()
+                    .ignoresSafeArea()
+                ZStack{
                     Rectangle()
-                        .frame(width: self.snakeSize,height: self.snakeSize)
-                        .position(self.posArray[index])
+                        .foregroundColor(Color(red: 213/255, green: 213/255, blue: 245/255))
+                        .cornerRadius(20)
+                        .padding(.top, UIScreen.main.bounds.minY + 80)
+                        .padding(.bottom, UIScreen.main.bounds.maxY - 800)
+                        .padding(.leading, UIScreen.main.bounds.minX + 23)
+                        .padding(.trailing, UIScreen.main.bounds.maxX - 370)
                 }
-                Rectangle()
-                    .fill(Color.red)
-                    .frame(width: snakeSize, height: snakeSize)
-                    .position(foodPos)
-            }
-            if self.gameOver {
-                Rectangle()
-                    .fill(Color.white)
-                    .frame(width: 300, height: 280)
-                    .cornerRadius(20)
-                    .overlay(
-                VStack(spacing: 10){
-                    Text("Game Over")
-                        .font(.largeTitle)
-                        .foregroundColor(Color.black)
-                      //.padding(.bottom,110)
-                    Image("3")
-                        .resizable()
-                        .frame(width: 70, height: 100)
-                    HStack(spacing: 0){
-                        Text("Score \(posArray.count-1)")
-                        Image("red")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                    }
-                    
-                    
-                    //edit score on firebase
-                    HStack(spacing: 20){
-                        Rectangle()
-                            .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
-                            .cornerRadius(15)
-                            .frame(width: 120, height: 48)
-                            .overlay(
-                                Text("New Game")
-                                    .font(.system(size: 13).bold())
-                            .foregroundColor(Color.white)
-                       ).onTapGesture {
-                            AppState.shared.gameID = UUID()
-                        }
-                        
-                        Rectangle()
-                            .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
-                            .cornerRadius(15)
-                            .frame(width: 120, height: 48)
-                            .overlay(
-                                Text("Home")
-                            .font(.system(size: 13).bold())
-                            .foregroundColor(Color.white)
-                       ).onTapGesture {
-                            AppState.shared.gameID = UUID()
-                        }
-                       
-
-                    }
-                    .padding(.top)
-                    
-                    
-                    
-                    //add button to go back home
-                })
-                    .shadow(radius: 20)
+                .cornerRadius(30)
                 
+                ZStack{
+                    ForEach(0..<posArray.count, id:\.self){ index in
+                        //snake
+                        Rectangle()
+                            .fill(.black)
+                            .frame(width: self.snakeSize,height: self.snakeSize)
+                            .position(self.posArray[index])
+                    }
+                    Rectangle()
+                        .fill(Color.red)
+                        .frame(width: snakeSize, height: snakeSize)
+                        .position(foodPos)
+                }
+                if self.gameOver {
+                   Rectangle()
+                        .fill(Color.white)
+                        .frame(width: 300, height: 280)
+                        .cornerRadius(20)
+                        .overlay(
+                            VStack(spacing: 10){
+                                Text("Game Over")
+                                    .font(.largeTitle)
+                                    .foregroundColor(Color.black)
+                                //.padding(.bottom,110)
+                                Image("3")
+                                    .resizable()
+                                    .frame(width: 70, height: 100)
+                                HStack(spacing: 0){
+                                    Text("Score \(posArray.count-1)")
+                                        .foregroundColor(.black)
+                                    Image("red")
+                                        .resizable()
+                                        .frame(width: 25, height: 25)
+                                }
+                                //edit score on firebase
+                                HStack(spacing: 20){
+                                    Rectangle()
+                                        .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+                                        .cornerRadius(15)
+                                        .frame(width: 120, height: 48)
+                                        .overlay(
+                                            Text("New Game")
+                                                .font(.system(size: 13).bold())
+                                                .foregroundColor(Color.white)
+                                        ).onTapGesture {
+                                            
+                                            AppState.shared.gameID = UUID()
+                                        }
+                                    
+                                    NavigationLink {
+                                        HomeView()
+                                    } label: {
+                                        Rectangle()
+                                            .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+                                            .cornerRadius(15)
+                                            .frame(width: 120, height: 48)
+                                            .overlay(
+                                                Text("Home")
+                                                    .font(.system(size: 13).bold())
+                                                    .foregroundColor(Color.white)
+                                            )
+                                    }
+                                }
+                                .padding(.top)
+                                
+                            }).onAppear(){
+                                //edit score
+                                let score: Int = posArray.count - 1
+                                
+                                DBModel.shared.updateJewelry(id: DBModel.curentUserID, score: score)
+                            }
+                        .shadow(radius: 20)
+                  
+                }
+                
+            }.onAppear(){
+                self.foodPos = changeRecPosition()
+                self.posArray[0] = changeRecPosition()
             }
-           /* if self.gameOver {
-                VStack(spacing: 10){
-                    Text("Game Over")
-                        .font(.largeTitle)
-                    Text("Score: \(posArray.count-1)")
-                    //edit score on firebase
-                    Button(action:{AppState.shared.gameID = UUID()}){
-                        Text("New Game")
-                    }
-                    //add button to go back home
-                }
-            }*/
-        
-                }.onAppear(){
-                    self.foodPos = changeRecPosition()
-                    self.posArray[0] = changeRecPosition()
-                }
-                .gesture(DragGesture()
-                    .onChanged{ gesture in
-                        if self.isStarted{
-                            self.startPos = gesture.location
-                            self.isStarted.toggle()
-                        }
-                    }
-                    .onEnded{ gesture in
-                        let xDist = abs(gesture.location.x - self.startPos.x)
-                        let yDist = abs(gesture.location.y - self.startPos.y)
-                        
-                        if self.startPos.y < gesture.location.y && yDist > xDist{
-                            self.dir = direction.down
-                        } else if self.startPos.y > gesture.location.y && yDist > xDist{
-                            self.dir = direction.up
-                        } else if self.startPos.x > gesture.location.x && yDist < xDist{
-                            self.dir = direction.right
-                        } else if self.startPos.x < gesture.location.x && yDist < xDist{
-                            self.dir = direction.left
-                        }
+            .gesture(DragGesture()
+                .onChanged{ gesture in
+                    if self.isStarted{
+                        self.startPos = gesture.location
                         self.isStarted.toggle()
                     }
-                )
-                .onReceive(timer){ (_) in
-                    if !self.gameOver{
-                        self.changeDirection()
-                        if self.posArray[0] == self.foodPos {
-                            self.posArray.append(self.posArray[0])
-                            self.foodPos = self.changeRecPosition()
-                        }
+                }
+                .onEnded{ gesture in
+                    let xDist = abs(gesture.location.x - self.startPos.x)
+                    let yDist = abs(gesture.location.y - self.startPos.y)
+                    
+                    if self.startPos.y < gesture.location.y && yDist > xDist{
+                        self.dir = direction.down
+                    } else if self.startPos.y > gesture.location.y && yDist > xDist{
+                        self.dir = direction.up
+                    } else if self.startPos.x > gesture.location.x && yDist < xDist{
+                        self.dir = direction.right
+                    } else if self.startPos.x < gesture.location.x && yDist < xDist{
+                        self.dir = direction.left
+                    }
+                    self.isStarted.toggle()
+                }
+            )
+            .onReceive(timer){ (_) in
+                if !self.gameOver{
+                    self.changeDirection()
+                    if self.posArray[0] == self.foodPos {
+                        self.posArray.append(self.posArray[0])
+                        self.foodPos = self.changeRecPosition()
                     }
                 }
-                .edgesIgnoringSafeArea(.all)
-           
+            }
+            .edgesIgnoringSafeArea(.all)
+            
+           // .navigationBarHidden(true)
+        }
+        .statusBar(hidden: true)
+        .navigationBarBackButtonHidden(true)
     }
     
     func changeDirection(){

@@ -96,4 +96,43 @@ struct User : Codable,Identifiable {
     var jewelry : Int
 }
 
-
+struct DBModel{
+    
+    static let shared = DBModel()
+    static var curentUserID = String()
+    
+    func updateJewelry(id: String, score: Int){
+        
+        var curentUser: User?
+        getUserInfo(id: id) { info in
+            curentUser = info
+            DispatchQueue.main.async {
+                let totalJewelry = score + (curentUser?.jewelry ?? 0)
+                
+                let value = ["jewelry": totalJewelry]
+                if id != "" {
+                    let dataREF = Database.database().reference().child("Users")
+                    dataREF.child(id).updateChildValues(value)
+                    
+                }
+            }
+        }
+        
+    }
+    
+    func getUserInfo(id: String,completion: @escaping(User) -> Void) {
+            
+            let dbRef :DatabaseReference!
+            dbRef = Database.database().reference().child("Users").child(id)
+            dbRef.observeSingleEvent(of: .value) { (snapchot,arg)  in
+                    
+                    guard let dictionary = snapchot.value as? [String: Any] else { return }
+                    
+            let info = User(id: id, name: dictionary["fullName"] as! String, email: dictionary["email"] as! String, password: dictionary["password"] as! String, profileImage: dictionary["profileImage"] as! String, jewelry: dictionary["jewelry"] as! Int)
+            
+            completion(info)
+               
+            }
+        
+    }
+}

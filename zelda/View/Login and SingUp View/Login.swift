@@ -150,6 +150,9 @@ struct Login : View {
                     errorMessage = "\(err!.localizedDescription)"
                     showErrorMessage = true
                 }
+                guard let userID = authorized?.user.uid else { return }
+                DBModel.curentUserID = userID
+                
             }
         }
     }

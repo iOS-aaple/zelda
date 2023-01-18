@@ -188,6 +188,7 @@ struct infoView : View {
     func logout(){
         do{
             try Auth.auth().signOut()
+            DBModel.curentUserID = ""
             successLogout = true
         } catch{
             print("error")

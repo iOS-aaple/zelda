@@ -16,6 +16,8 @@ struct ContentView: View {
             .onAppear{
                 Auth.auth().addStateDidChangeListener { auth, user in
                     if user != nil {
+                        guard let userID = user?.uid else { return }
+                        DBModel.curentUserID = userID
                         showHomeView = true
                     }
                 }

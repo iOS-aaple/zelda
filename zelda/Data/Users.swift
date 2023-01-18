@@ -100,6 +100,7 @@ struct DBModel{
     
     static let shared = DBModel()
     static var curentUserID = String()
+    static var userJewelry = Int()
     
     func updateJewelry(id: String, score: Int){
         
@@ -113,11 +114,9 @@ struct DBModel{
                 if id != "" {
                     let dataREF = Database.database().reference().child("Users")
                     dataREF.child(id).updateChildValues(value)
-                    
                 }
             }
         }
-        
     }
     
     func getUserInfo(id: String,completion: @escaping(User) -> Void) {
@@ -133,6 +132,6 @@ struct DBModel{
             completion(info)
                
             }
-        
     }
-}
+    
+    }

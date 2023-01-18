@@ -79,9 +79,9 @@ struct Moves : View {
                         .cornerRadius(10)
                         .padding(.leading, 270)
                         Text("")
-                            .alert(endGame, isPresented: $gameEnded){
+                            /*.alert(endGame, isPresented: $gameEnded){
                                 Button( "Reset", role: .destructive, action: resetGame)
-                            }
+                            }*/
                         Spacer()
                             .padding()
                         Text("Tic Tac Toe")
@@ -125,12 +125,127 @@ struct Moves : View {
                         }
                         
                     }
+                    if gameEnded{
+                        if endGame == "X has won!"{
+                            Rectangle()
+                                .fill(Color.white)
+                                .frame(width: 320, height: 300)
+                                .cornerRadius(20)
+                                .overlay(
+                                    VStack(spacing: 10){
+                                        Text("You Win!!")
+                                            .font(.largeTitle)
+                                            .foregroundColor(Color.black)
+                                        Image("winCharacter")
+                                            .resizable()
+                                            .frame(width: 70, height: 100)
+                                        HStack(spacing: 0){
+                                            Text("You got 10")
+                                                .foregroundColor(Color.black)
+                                            Image("red")
+                                                .resizable()
+                                                .frame(width: 25, height: 25)
+                                        }
+                                        
+                                        
+                                        //edit score on firebase
+                                        HStack(spacing: 20){
+                                            Rectangle()
+                                                .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+                                                .cornerRadius(15)
+                                                .frame(width: 120, height: 48)
+                                                .overlay(
+                                                    Text("New Game")
+                                                        .font(.system(size: 13).bold())
+                                                        .foregroundColor(Color.white)
+                                                ).onTapGesture {
+                                                   resetGame()
+                                                }
+                                            
+                                            NavigationLink {
+                                                HomeView()
+                                            } label: {
+                                                Rectangle()
+                                                    .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+                                                    .cornerRadius(15)
+                                                    .frame(width: 120, height: 48)
+                                                    .overlay(
+                                                        Text("Home")
+                                                            .font(.system(size: 13).bold())
+                                                            .foregroundColor(Color.white)
+                                                    )
+                                                    .navigationBarBackButtonHidden(true)
+                                                    .statusBar(hidden: true)
+                                            }
+                                        }
+                                        .padding(.top)
+                                        
+                                    }).onAppear(){
+                                        DBModel.shared.updateJewelry(id: DBModel.curentUserID, score: 10, operation: "+", image: "")
+                                    }
+                                .shadow(radius: 20)
+                        } else if endGame == "O has won!"{
+                            Rectangle()
+                                .fill(Color.white)
+                                .frame(width: 320, height: 300)
+                                .cornerRadius(20)
+                                .overlay(
+                                    VStack(spacing: 10){
+                                        Text("Sorry you lose")
+                                            .font(.largeTitle)
+                                            .foregroundColor(Color.black)
+                                        Image("1")
+                                            .resizable()
+                                            .frame(width: 70, height: 100)
+                                        
+                                        Text("You can try again")
+                                            .foregroundColor(Color.black)
+                                        //edit score on firebase
+                                        HStack(spacing: 20){
+                                            Rectangle()
+                                                .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+                                                .cornerRadius(15)
+                                                .frame(width: 120, height: 48)
+                                                .overlay(
+                                                    Text("New Game")
+                                                        .font(.system(size: 13).bold())
+                                                        .foregroundColor(Color.white)
+                                                ).onTapGesture {
+                                                    resetGame()
+                                                }
+                                            
+                                            
+                                                    NavigationLink {
+                                                        HomeView()
+                                                    } label: {
+                                                        Rectangle()
+                                                            .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+                                                            .cornerRadius(15)
+                                                            .frame(width: 120, height: 48)
+                                                            .overlay(
+                                                                Text("Home")
+                                                                    .font(.system(size: 13).bold())
+                                                                    .foregroundColor(Color.white)
+                                                            )
+                                                            .navigationBarBackButtonHidden(true)
+                                                            .statusBar(hidden: true)
+                                                    }
+                                                    
+                                        }
+                                        .padding(.top)
+                                        
+                                    })
+                                .shadow(radius: 20)
+                        }
+                    }
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
     func resetGame(){
         endGame = "Tic Tac Toe"
+        gameEnded.toggle()
         moves = ["","","","","","","","",""]
     }
     func PlayerTap(index: Int){

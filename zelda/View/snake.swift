@@ -117,7 +117,7 @@ struct snake: View {
                                 //edit score
                                 let score: Int = posArray.count - 1
                                 
-                                DBModel.shared.updateJewelry(id: DBModel.curentUserID, score: score)
+                                DBModel.shared.updateJewelry(id: DBModel.curentUserID, score: score,operation: "+", image: "")
                             }
                         .shadow(radius: 20)
                   

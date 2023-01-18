@@ -79,6 +79,7 @@ struct Home: View {
                                 XO()
                                 ThePuzzle()
                                 Snake()
+                                UniverseMemory()
                                     .padding(.bottom, -50)
                             }
                         }
@@ -136,9 +137,9 @@ struct XO : View {
                 Spacer()
             } .padding(.leading, 20)
             
-            Text("XO")
+            Text("Tic Tac Toe")
                 .multilineTextAlignment(.center)
-                .font(.system(size: 30, design: .monospaced))
+                .font(.system(size: 25, design: .monospaced))
                 .frame(maxWidth: 200)
                 .padding(.horizontal)
                 .shadow(color: Color.black.opacity(0.9), radius: 8, x: 2, y: 6)
@@ -146,7 +147,7 @@ struct XO : View {
             VStack(spacing: 20){
                 Spacer(minLength: 0)
                 HStack{
-                    NavigationLink(destination: {}) {
+                    NavigationLink(destination:  Moves()) {
                         Text("Play")
                             .font(.caption)
                             .foregroundColor(.white)
@@ -187,7 +188,7 @@ struct ThePuzzle : View {
             
             Text("Puzzle")
                 .multilineTextAlignment(.center)
-                .font(.system(size: 30, design: .monospaced))
+                .font(.system(size: 25, design: .monospaced))
                 .frame(maxWidth: 200)
                 .padding(.horizontal)
                 .shadow(color: Color.black.opacity(0.9), radius: 8, x: 2, y: 6)
@@ -239,7 +240,7 @@ struct Snake : View {
             
             Text("Snake")
                 .multilineTextAlignment(.center)
-                .font(.system(size: 30, design: .monospaced))
+                .font(.system(size: 25, design: .monospaced))
                 .frame(maxWidth: 200)
                 .padding(.horizontal)
                 .shadow(color: Color.black.opacity(0.9), radius: 8, x: 2, y: 6)
@@ -272,7 +273,7 @@ struct Snake : View {
                 .padding(.trailing, 25)
             )
         .padding(.horizontal)
-        .padding(.bottom, 100)
+        .padding(.bottom, -90)
     }
 }
 struct UniverseMemory : View {
@@ -281,16 +282,16 @@ struct UniverseMemory : View {
     var body: some View {
         HStack {
             HStack{
-                Image("")
+                Image("universe")
                     .resizable()
                     .frame(width: UIScreen.main.bounds.width / 3)
-                    .frame(width: 150, height: 150)
+                    .frame(width: 50, height: 80)
                 Spacer()
-            } .padding(.leading, -20)
+            } .padding(.leading, 20)
             
             Text("Universe Memory")
                 .multilineTextAlignment(.center)
-                .font(.system(size: 30, design: .monospaced))
+                .font(.system(size: 25, design: .monospaced))
                 .frame(maxWidth: 200)
                 .padding(.horizontal)
                 .shadow(color: Color.black.opacity(0.9), radius: 8, x: 2, y: 6)
@@ -298,7 +299,7 @@ struct UniverseMemory : View {
             VStack(spacing: 20){
                 Spacer(minLength: 0)
                 HStack{
-                    NavigationLink(destination: {}) {
+                    NavigationLink(destination:  MemoryGameView()) {
                         Text("Play")
                             .font(.caption)
                             .foregroundColor(.white)
@@ -306,13 +307,13 @@ struct UniverseMemory : View {
                             .padding(.horizontal, 25)
                             .background(Capsule().stroke(Color.white, lineWidth: 2))
                     }
-                    .offset(x: -20, y: -70)
+                    .offset(x: -20, y: -50)
                 }
                 
                
             }
         }
-        .frame(height: 290)
+        .frame(height: 200)
         .background(
             Color.white.opacity(0.2)
                 .cornerRadius(25)
@@ -323,6 +324,7 @@ struct UniverseMemory : View {
                 .padding(.trailing, 25)
             )
         .padding(.horizontal)
+        .padding(.bottom, -90)
     }
 }
 struct HomeData : Identifiable{

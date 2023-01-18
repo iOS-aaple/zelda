@@ -44,10 +44,10 @@ struct FrindsView: View {
                     
                     List{
                         
-                        ForEach(usersManger.users){ user  in
+                        ForEach(0..<usersManger.users.count,id: \.self){ counter  in
                           
-                            NavigationLink(destination: ChatsView(resUser: user, messagesManger: Messages(receiverUser: user)) ){
-                                Cell(user: user)
+                            NavigationLink(destination: ChatsView(resUser: usersManger.users[counter], messagesManger: Messages(receiverUser: usersManger.users[counter])) ){
+                                Cell(user: usersManger.users[counter], conter: counter+1)
                             }
                             
                         }.listRowBackground(Color.clear)

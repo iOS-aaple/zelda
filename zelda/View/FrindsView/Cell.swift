@@ -10,14 +10,36 @@ import SwiftUI
 struct Cell: View {
      
     @State var user : User
-  
+    @State var conter :Int
     var body: some View {
         
         HStack{
-            Text("1")
+            Text("\(conter)")
                 .foregroundColor(Color.white)
+                
             
-            Image("1")
+            
+            
+            if conter == 1{
+                Image("Award_gold")
+                    .frame(width: 10,height: 10)
+                    .padding(10)
+            }
+            else if conter == 2 {
+                Image("Awards_silver")
+                    .frame(width: 10,height: 10)
+                    .padding(10)
+            } else if conter == 3 {
+                
+                Image("Awards_bronze")
+                    .frame(width: 10,height: 10)
+                    .padding(10)
+            }
+            
+           
+            
+            
+            Image("\(user.profileImage)")
                 .resizable()
                 .frame(width: 70,height: 70)
                 .clipShape(Circle())
@@ -26,9 +48,28 @@ struct Cell: View {
                 HStack(){
                     Text("\(user.name)")
                         .foregroundColor(Color.white)
+                        .font(.system(size: 15)).bold()
                     Spacer()
-                    Image("Awards_bronze")
-                        .frame(width: 20,height: 20)
+                   
+                    HStack{
+                    
+                        Image("red")
+                            .resizable()
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .frame(width: 23, height: 23)
+                        
+                        Text("\(user.jewelry)")
+                            .font(.system(size: 12))
+                    }
+                    
+                        
+                       
+                          
+                       
+                            
+                        
+                  
                 }
             }
         }

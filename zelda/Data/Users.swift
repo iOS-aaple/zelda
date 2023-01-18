@@ -69,7 +69,7 @@ class Users : ObservableObject {
             let dbRef: DatabaseReference!
             dbRef = Database.database().reference().child("Users")
             dbRef.observe(.value) { users, err in
-                
+                self.users.removeAll()
                 if let allUsers = users.value as? NSDictionary {
                     for user in allUsers {
                         if "\(user.key)" != Auth.auth().currentUser!.uid{
@@ -81,6 +81,8 @@ class Users : ObservableObject {
                         }
                     }
                 }
+                self.users.sort(by: {$0.jewelry > $1.jewelry})
+               
             }
         }
         

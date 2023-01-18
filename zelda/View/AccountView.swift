@@ -49,9 +49,6 @@ struct AccountView: View {
               
                 
             }
-        }.onAppear{
-           
-            
         }
     }
     
@@ -94,10 +91,13 @@ struct infoView : View {
             
 
                 HStack(alignment: .center){
-                    Image("dollar")
-                    .resizable()
-                    .frame(width: 30 , height: 30)
-                    Text("\(playerCoins) \(user?.jewelry ?? 0) $")
+                    
+                    Image("red")
+                        .resizable()
+                        .font(.title)
+                        .foregroundColor(.white)
+                        .frame(width: 23, height: 23)
+                    Text("\(playerCoins) \(user?.jewelry ?? 0)")
                     .foregroundColor(Color.white)
                 }.padding(20)
 
@@ -178,9 +178,9 @@ struct infoView : View {
             
             Image("\(user?.profileImage ?? "1")")
                 .resizable()
-                .frame(width: 120 , height: 180)
+                .frame(width: 100 , height: 150)
                 .padding(.leading , 40)
-                .padding(.top , 160)
+                .padding(.top , 120)
         
         }
     }

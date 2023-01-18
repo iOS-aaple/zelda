@@ -92,7 +92,8 @@ struct MemoryGameView: View {
                                                     .resizable()
                                                     .frame(width: 70, height: 100)
                                                 HStack(spacing: 0){
-                                                    Text("You got 12")
+                                                    Text("You got 20")
+                                                        .foregroundColor(Color.black)
                                                     Image("red")
                                                         .resizable()
                                                         .frame(width: 25, height: 25)
@@ -113,27 +114,32 @@ struct MemoryGameView: View {
                                                             AppState.shared.gameID = UUID()
                                                         }
                                                     
-                                                    Rectangle()
-                                                        .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
-                                                        .cornerRadius(15)
-                                                        .frame(width: 120, height: 48)
-                                                        .overlay(
-                                                            Text("Home")
-                                                                .font(.system(size: 13).bold())
-                                                                .foregroundColor(Color.white)
-                                                        ).onTapGesture {
-                                                            AppState.shared.gameID = UUID()
-                                                        }
-                                                    
+                                                    NavigationLink {
+                                                        HomeView()
+                                                    } label: {
+                                                        Rectangle()
+                                                            .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+                                                            .cornerRadius(15)
+                                                            .frame(width: 120, height: 48)
+                                                            .overlay(
+                                                                Text("Home")
+                                                                    .font(.system(size: 13).bold())
+                                                                    .foregroundColor(Color.white)
+                                                            )
+                                                            .navigationBarBackButtonHidden(true)
+                                                           // .navigationBarHidden(true)
+                                                            .statusBar(hidden: true)
+                                                    }
                                                     
                                                 }
                                                 .padding(.top)
                                                 
                                                 //add button to go back home
-                                            })
+                                            }).onAppear(){
+                                                DBModel.shared.updateJewelry(id: DBModel.curentUserID, score: 20, operation: "+", image: "")
+                                            }
                                         .shadow(radius: 20)
                                         .padding(.bottom, 700)
-                                    
                                 } else if self.loseState {
                                     Rectangle()
                                         .fill(Color.white)
@@ -150,7 +156,7 @@ struct MemoryGameView: View {
                                                     .frame(width: 70, height: 100)
                                                 
                                                 Text("You can try again")
-                                                
+                                                    .foregroundColor(Color.black)
                                                 //edit score on firebase
                                                 HStack(spacing: 20){
                                                     Rectangle()
@@ -200,10 +206,9 @@ struct MemoryGameView: View {
                 vm.updateCountdown()
                 gameOver()
             }
-            .navigationBarHidden(true)
         }
         .statusBar(hidden: true)
-            
+        .navigationBarBackButtonHidden(true)
            }
     
     func gameOver(){
@@ -226,8 +231,8 @@ extension MemoryGameView{
     final class ViewModel: ObservableObject{
         @Published var isActive = false
         @Published var isGameOver = false
-        @Published var time = "1:00"
-        @Published var minuts: Float = 1.0{
+        @Published var time = "2:00"
+        @Published var minuts: Float = 2.0{
             didSet{
                 self.time = "\(Int(minuts)):00"
             }

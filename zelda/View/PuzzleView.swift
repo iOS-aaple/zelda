@@ -11,67 +11,121 @@ struct PuzzleView: View {
     @ObservedObject var puzzelVM = PuzzleViewModel()
     @State private var gameOver = false
     
-    @State var coinsCount = 0
-    
+
     var body: some View {
-        
-        ZStack(alignment: .bottomTrailing){
-            
-            VStack{
+        ZStack{
+            ZStack(alignment: .bottomTrailing){
                 
-                HStack(alignment: .center){
-                Text(" Puzzle Game ")
-                .font(.system(size: 35))
-                .monospaced()
-                .bold()
-                .foregroundColor(Color.white)
-                Image("puzzle")
-                .resizable()
-                .frame(width: 80, height: 80)
-                }
-                .padding(10)
-                .background(Color(red: 21/255, green: 50/255, blue: 89/255))
-                .cornerRadius(40)
-                
-
-                
-            LazyVGrid(columns : [GridItem(.fixed(80)), GridItem(.fixed(80)), GridItem(.fixed(80)), GridItem(.fixed(80))]){
-            ForEach(puzzelVM.puzzles){ puzzle in
-            CartView(num: puzzle.content, id: puzzle.id)
-                    .cornerRadius(10)
-    //                .background(puzzelVM.puzzleModel.currentState Color.green : Color.black)
-                
-                    .onTapGesture{
-                        withAnimation{
-                        puzzelVM.selected(selectedPuzzle: puzzle)
-                            puzzelVM.puzzleModel.puzzleSign()
-                            //                        print(" current state \(puzzelVM.puzzleModel.currentState)")
-                            gameOver = puzzelVM.puzzleModel.isGameOver
-                            
-                            if gameOver == true {
-                                coinsCount += 10
-                                print("\(coinsCount)")
-                            }
-                        }
-                    }.sheet(isPresented: $gameOver){
-                        GameOverView(coinsCount: $coinsCount)
-
-
-                        
+                VStack{
+                    
+                    HStack(alignment: .center){
+                        Text(" Puzzle Game ")
+                            .font(.system(size: 35))
+                            .monospaced()
+                            .bold()
+                            .foregroundColor(Color.white)
+                        Image("puzzle")
+                            .resizable()
+                            .frame(width: 80, height: 80)
                     }
+                    .padding(10)
+                    .background(Color(red: 21/255, green: 50/255, blue: 89/255))
+                    .cornerRadius(40)
+                    
+                    
+                    
+                    LazyVGrid(columns : [GridItem(.fixed(80)), GridItem(.fixed(80)), GridItem(.fixed(80)), GridItem(.fixed(80))]){
+                        ForEach(puzzelVM.puzzles){ puzzle in
+                            CartView(num: puzzle.content, id: puzzle.id)
+                                .cornerRadius(10)
+                            //                .background(puzzelVM.puzzleModel.currentState Color.green : Color.black)
+                            
+                                .onTapGesture{
+                                    withAnimation{
+                                        puzzelVM.selected(selectedPuzzle: puzzle)
+                                        puzzelVM.puzzleModel.puzzleSign()
+                                        //                        print(" current state \(puzzelVM.puzzleModel.currentState)")
+                                        gameOver = puzzelVM.puzzleModel.isGameOver
+                                        
+                                    }
+                                }
+                        }
+                    }
+                    .padding(60)
+                    newGameButton
+                }.frame(width: UIScreen.main.bounds.width , height: UIScreen.main.bounds.height)
+                    .background(Image("background") .resizable() .scaledToFill()
+                        .edgesIgnoringSafeArea([.top , .bottom , .leading , .trailing]) )
+                
+                Image("1")
+                    .resizable()
+                    .frame(width: 120 , height: 180)
+                    .padding(.trailing , 20)
+                    .padding(.bottom , 20)
             }
-    }
-            .padding(60)
-            newGameButton
-            }.frame(width: UIScreen.main.bounds.width , height: UIScreen.main.bounds.height)
-                .background(Image("background") .resizable() .scaledToFill()
-                    .edgesIgnoringSafeArea([.top , .bottom , .leading , .trailing]) )
             
-            Image("1")
-                .resizable()
-                .frame(width: 120 , height: 180)
-                .padding(.trailing , 20)
-                .padding(.bottom , 20)
+            if self.gameOver {
+                Rectangle()
+                    .fill(Color.white)
+                    .frame(width: 320, height: 300)
+                    .cornerRadius(20)
+                    .overlay(
+                        VStack(spacing: 10){
+                            Text("You Are Genius!")
+                                .font(.largeTitle)
+                                .foregroundColor(Color.black)
+                            //  .padding(.bottom,110)
+                            Image("winCharacter")
+                                .resizable()
+                                .frame(width: 70, height: 100)
+                            HStack(spacing: 0){
+                                Text("You got 20")
+                                    .foregroundColor(Color.black)
+                                Image("red")
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
+                            }
+                            
+                            
+                            //edit score on firebase
+                            HStack(spacing: 20){
+                                Rectangle()
+                                    .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+                                    .cornerRadius(15)
+                                    .frame(width: 120, height: 48)
+                                    .overlay(
+                                        Text("New Game")
+                                            .font(.system(size: 13).bold())
+                                            .foregroundColor(Color.white)
+                                    ).onTapGesture {
+                                        AppState.shared.gameID = UUID()
+                                    }
+                                
+                                NavigationLink {
+                                    HomeView()
+                                } label: {
+                                    Rectangle()
+                                        .fill(Color(red: 12/255, green: 35/255, blue: 66/255))
+                                        .cornerRadius(15)
+                                        .frame(width: 120, height: 48)
+                                        .overlay(
+                                            Text("Home")
+                                                .font(.system(size: 13).bold())
+                                                .foregroundColor(Color.white)
+                                        )
+                                        .navigationBarBackButtonHidden(true)
+                                        .statusBar(hidden: true)
+                                }
+                                
+                            }
+                            .padding(.top)
+                            
+                        }).onAppear(){
+                            DBModel.shared.updateJewelry(id: DBModel.curentUserID, score: 20, operation: "+", image: "")
+                        }
+                    .shadow(radius: 20)
+                   // .padding(.bottom, 700)
+            }
         }
 
     }
@@ -118,7 +172,7 @@ struct CartView : View {
     }
 }
 
-struct GameOverView : View{
+/*struct GameOverView : View{
 
     @Binding var coinsCount : Int
     var body: some View{
@@ -142,7 +196,7 @@ struct GameOverView : View{
             }
         }
     }
-}
+}*/
 
 struct PuzzleView_Previews: PreviewProvider {
     static var previews: some View {

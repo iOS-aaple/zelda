@@ -86,7 +86,7 @@ struct Characters : View {
                         ScrollView(.vertical, showsIndicators: false){
                             VStack(spacing: 10) {
                                 ForEach(data){ i in
-                                    Card(data: i)
+                                    Card(data: i, userJewerly: $userJewerly)
                                 }
                             }
                             .padding(.bottom)
@@ -101,6 +101,7 @@ struct Characters : View {
 }
 struct Card : View {
     var data : Player
+    @Binding var userJewerly: Int
     var body: some View {
         HStack {
             Image(self.data.image)
@@ -153,7 +154,7 @@ struct Card : View {
                     )
                     .clipShape(Circle())
                 Spacer(minLength: 0)
-                NavigationLink(destination: Detail(data: self.data)) {
+                NavigationLink(destination: Detail(userJewerly: $userJewerly , data: self.data)) {
                     Text("See Details")
                         .font(.caption)
                         .foregroundColor(.white)
@@ -181,7 +182,12 @@ struct Card : View {
 }
 
 struct Detail : View {
+    @Binding var userJewerly: Int
     @State private var presentAlert = false
+    @State var isBuying = false
+    @State var errorBuyingAlert = false
+    
+    
     var data : Player
     // used to pop the top most view on stack
     @Environment(\.presentationMode) var present
@@ -219,7 +225,7 @@ struct Detail : View {
                                         .frame(width: 50, height: 30)
                                         
                                 }
-                                Text("100")
+                                Text("\(userJewerly)")
                                     .foregroundColor(Color(red: 0.01332890149, green: 0.04810451716, blue:  0.1187042817))
                             }
                             .padding(.trailing)
@@ -284,12 +290,21 @@ struct Detail : View {
                                     .background(Capsule().stroke(Color.white, lineWidth: 2))
                                 
                                     .alert("are you sure to buy \(self.data.name)?", isPresented: $presentAlert, actions: {
-                                        // 1
-                                        Button("buy", role: .cancel, action: {})
+                                        
+                                        Button("buy", role: .cancel, action: {
+                                            //check if user have enough jewerly to buy it
+                                            buyCharacter(price: self.data.price, jewerly: userJewerly, image:self.data.image)
+                                            
+                                        })
                                         Button("Cancel", role: .destructive, action: {})
                                         
                                     }, message: {
                                         Text("")
+                                    })
+                                    .alert("Failed to buy", isPresented: $errorBuyingAlert, actions: {
+                                        
+                                    }, message: {
+                                        Text("Sorry your jewerly not enough to buy \(self.data.name) :(")
                                     })
                             }
                                 
@@ -303,7 +318,17 @@ struct Detail : View {
             }
         }
     }
+    
+    func buyCharacter(price: Int, jewerly: Int, image: String){
+        if jewerly >= price{
+            self.isBuying.toggle()
+            DBModel.shared.updateJewelry(id: DBModel.curentUserID, score: price, operation: "-", image: image)
+        } else {
+            self.errorBuyingAlert.toggle()
+        }
+    }
 }
+
 struct Player : Identifiable {
     let id : Int
     let power : [CGFloat]

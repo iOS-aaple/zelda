@@ -104,16 +104,24 @@ struct DBModel{
     static var curentUserID = String()
     static var userJewelry = Int()
     
-    func updateJewelry(id: String, score: Int){
+    func updateJewelry(id: String, score: Int, operation: String, image: String){
         
         var curentUser: User?
+        
         getUserInfo(id: id) { info in
             curentUser = info
             DispatchQueue.main.async {
-                let totalJewelry = score + (curentUser?.jewelry ?? 0)
-                
-                let value = ["jewelry": totalJewelry]
-                if id != "" {
+                var totalJewelry = Int()
+                var value = [String: Any]()
+                if operation == "+"{
+                    totalJewelry = score + (curentUser?.jewelry ?? 0)
+                     value = ["jewelry": totalJewelry]
+                } else {
+                    totalJewelry = (curentUser?.jewelry ?? 0) - score
+                    value = ["profileImage": image
+                             ,"jewelry": totalJewelry]
+                }
+                    if id != "" {
                     let dataREF = Database.database().reference().child("Users")
                     dataREF.child(id).updateChildValues(value)
                 }

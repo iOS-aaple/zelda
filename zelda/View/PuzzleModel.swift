@@ -56,7 +56,7 @@ struct PuzzleModel {
             currentState = puzzles[index].isPuzzle
         }
             if puzzles.filter({$0.isPuzzle == true}).count ==  puzzleNum-1 {
-                isGameOver = true
+                isGameOver.toggle()
                 print("is game over ? \(isGameOver)")
 
             }

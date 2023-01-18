@@ -76,7 +76,7 @@ struct MemoryGameView: View {
                                 .padding(.horizontal)
                             
                             //handel end of the game option
-                            if vm.isGameOver{
+                            if vm.isGameOver || matchedCards.count == 24{
                                 if self.winState {
                                     Rectangle()
                                         .fill(Color.white)
@@ -147,7 +147,7 @@ struct MemoryGameView: View {
                                         .cornerRadius(20)
                                         .overlay(
                                             VStack(spacing: 10){
-                                                Text("Sorry you lose")
+                                                Text("Time Over")
                                                     .font(.largeTitle)
                                                     .foregroundColor(Color.black)
                                                 //  .padding(.bottom,110)
@@ -155,7 +155,7 @@ struct MemoryGameView: View {
                                                     .resizable()
                                                     .frame(width: 70, height: 100)
                                                 
-                                                Text("You can try again")
+                                                Text("It's ok you can try again")
                                                     .foregroundColor(Color.black)
                                                 //edit score on firebase
                                                 HStack(spacing: 20){

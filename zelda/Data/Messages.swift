@@ -43,7 +43,7 @@ class Messages:ObservableObject  {
             dbRef.observe(.childAdded) { dataSnapshot, err in
             
             if let allMessages = dataSnapshot.value as? NSDictionary {
- 
+             
                 let dateFormater = DateFormatter()
                 dateFormater.dateFormat = "yyyy-MM-dd HH:mm:ssZ"
                let time =  dateFormater.date(from: "\(allMessages["time"] as! String)")

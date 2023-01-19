@@ -51,7 +51,7 @@ class Users : ObservableObject {
                 } else {
                     if let user = resualt.value as? NSDictionary {
                         
-                        let newUser = User(id: userID, name: user["fullName"] as! String, email: user["email"] as! String, password: user["password"] as! String, profileImage: user["profileImage"] as! String, jewelry: user["jewelry"] as! Int)
+                        let newUser = User(id: userID, name: user["fullName"] as! String, email: user["email"] as! String, password: user["password"] as! String, profileImage: user["profileImage"] as! String, jewelry: user["jewelry"] as! Int,character:user["Character"] as? [String:Int])
                         
                         self.user = newUser
                        
@@ -96,6 +96,7 @@ struct User : Codable,Identifiable {
     var password: String
     var profileImage :String
     var jewelry : Int
+    var character :[String:Int]?
 }
 
 struct DBModel{
@@ -129,6 +130,35 @@ struct DBModel{
         }
     }
     
+    func buyCharacter(id:String,characterID:Int){
+        var curentUser: User?
+        getUserInfo(id: id) { info in
+            curentUser = info
+            DispatchQueue.main.async{
+//                var Character = String()
+//                var value = [String:Int]()
+//                value = ["CharacterID":characterID]
+                let dataREF = Database.database().reference().child("Users")
+                dataREF.child(id).child("Character").updateChildValues(["\(UUID())":characterID])
+            }
+        }
+    }
+    
+    func updateCharacter(id:String,characterName:String){
+        
+        var curentUser: User?
+        getUserInfo(id: id) { info in
+            curentUser = info
+            DispatchQueue.main.async{
+//                var Character = String()
+//                var value = [String:Int]()
+//                value = ["CharacterID":characterID]
+                let dataREF = Database.database().reference().child("Users")
+                dataREF.child(id).updateChildValues(["profileImage":characterName])
+            }
+        }
+    }
+    
     func getUserInfo(id: String,completion: @escaping(User) -> Void) {
             
             let dbRef :DatabaseReference!
@@ -137,8 +167,11 @@ struct DBModel{
                     
                     guard let dictionary = snapchot.value as? [String: Any] else { return }
                     
-            let info = User(id: id, name: dictionary["fullName"] as! String, email: dictionary["email"] as! String, password: dictionary["password"] as! String, profileImage: dictionary["profileImage"] as! String, jewelry: dictionary["jewelry"] as! Int)
-            
+                let info = User(id: id, name: dictionary["fullName"] as! String, email: dictionary["email"] as! String, password: dictionary["password"] as! String, profileImage: dictionary["profileImage"] as! String, jewelry: dictionary["jewelry"] as! Int, character:dictionary["Character"] as? [String:Int])
+            print("🟢")
+                
+                print(info)
+                
             completion(info)
                
             }

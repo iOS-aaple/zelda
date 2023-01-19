@@ -3,7 +3,7 @@
 //  zelda
 //
 //  Created by Munira on 14/01/2023.
-//
+//v
 
 import SwiftUI
 
@@ -186,7 +186,7 @@ struct Detail : View {
     @State private var presentAlert = false
     @State var isBuying = false
     @State var errorBuyingAlert = false
-    
+    @StateObject private var user = Users()
     
     var data : Player
     // used to pop the top most view on stack
@@ -274,7 +274,7 @@ struct Detail : View {
                             presentAlert = true
 
                         }) {
-                           
+                            
                             if self.data.id == 0 {
                                 Text(self.data.description)
                                     .foregroundColor(.white)
@@ -283,6 +283,21 @@ struct Detail : View {
                                     .background(Capsule().stroke(Color.white, lineWidth: 2))
                                 
                             } else {
+                                if ((user.user?.character?.first(where: {$0.value == self.data.id})) != nil) {
+                                    
+                                    Button(action:{
+                                        DBModel.shared.updateCharacter(id: DBModel.curentUserID, characterName: self.data.name)
+                                        
+                                    }){
+                                        Text("Set as Main character")
+                                            .foregroundColor(.white)
+                                            .padding(.vertical)
+                                            .padding(.horizontal)
+                                        //                                        .frame(width: (UIScreen.main.bounds.width / 2))
+                                            .background(Capsule().stroke(Color.white, lineWidth: 2))
+                                    }
+                                    
+                                } else{
                                 Text(self.data.description)
                                     .foregroundColor(.white)
                                     .padding(.vertical)
@@ -307,6 +322,8 @@ struct Detail : View {
                                         Text("Sorry your jewerly not enough to buy \(self.data.name) :(")
                                     })
                             }
+                                    }
+                        
                                 
                         }
                     }
@@ -323,6 +340,8 @@ struct Detail : View {
         if jewerly >= price{
             self.isBuying.toggle()
             DBModel.shared.updateJewelry(id: DBModel.curentUserID, score: price, operation: "-", image: image)
+            DBModel.shared.buyCharacter(id: DBModel.curentUserID, characterID: data.id)
+            
         } else {
             self.errorBuyingAlert.toggle()
         }
@@ -339,10 +358,10 @@ struct Player : Identifiable {
     let description : String
 }
 var data = [Player(id: 0, power: [0.2,0.5,0.9], image: "1", name: "Sherman", color: .clear, price: 0, description: "you already have it"),
-            Player(id: 1, power: [0.3,0.5,0.6], image: "luca", name: "Luca", color: .clear, price: 800, description: "buy"),
-            Player(id: 2, power: [0.7,0.5,1], image: "marty", name: "Marty", color: .clear, price: 1000, description: "buy"),
+            Player(id: 1, power: [0.3,0.5,0.6], image: "Luca", name: "Luca", color: .clear, price: 800, description: "buy"),
+            Player(id: 2, power: [0.7,0.5,1], image: "Marty", name: "Marty", color: .clear, price: 1000, description: "buy"),
             Player(id: 3, power: [0.8,0.2,1], image: "Leah", name: "Leah", color: .clear, price: 3000, description: "buy"),
-            Player(id: 4, power: [1,1,1], image: "zelda2", name: "Zelda", color: .clear, price: 5000, description: "buy"),
+            Player(id: 4, power: [1,1,1], image: "Zelda", name: "Zelda", color: .clear, price: 5000, description: "buy"),
             Player(id: 5, power: [1,0.3,1], image: "Anderson", name: "Anderson", color: .clear, price: 3500, description: "buy"),
 
 ]

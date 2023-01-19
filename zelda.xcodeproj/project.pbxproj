@@ -41,6 +41,7 @@
 		AF3C0CC4297736C800E742CF /* XO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C0CC3297736C800E742CF /* XO.swift */; };
 		AF80AC9229783F3E00F7279B /* FacebookLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80AC9129783F3E00F7279B /* FacebookLogin.swift */; };
 		AF80AC962978874800F7279B /* HomeGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80AC952978874800F7279B /* HomeGames.swift */; };
+		AF80AC9829789CE400F7279B /* Wordle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80AC9729789CE400F7279B /* Wordle.swift */; };
 		E44717F02973F29F00EA5834 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44717EF2973F29F00EA5834 /* AccountView.swift */; };
 		E4DCF50C29767C5B00FF02C8 /* PuzzleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DCF50B29767C5B00FF02C8 /* PuzzleView.swift */; };
 		E4DCF51029767D8600FF02C8 /* PuzzleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DCF50F29767D8600FF02C8 /* PuzzleModel.swift */; };
@@ -74,6 +75,7 @@
 		AF3C0CC3297736C800E742CF /* XO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XO.swift; sourceTree = "<group>"; };
 		AF80AC9129783F3E00F7279B /* FacebookLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLogin.swift; sourceTree = "<group>"; };
 		AF80AC952978874800F7279B /* HomeGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGames.swift; sourceTree = "<group>"; };
+		AF80AC9729789CE400F7279B /* Wordle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wordle.swift; sourceTree = "<group>"; };
 		E44717EF2973F29F00EA5834 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		E4DCF50B29767C5B00FF02C8 /* PuzzleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleView.swift; sourceTree = "<group>"; };
 		E4DCF50F29767D8600FF02C8 /* PuzzleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleModel.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		3F3A76E929730011002E0BB1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AF80AC9729789CE400F7279B /* Wordle.swift */,
 				E4DCF50E29767D4900FF02C8 /* PuzzleGame */,
 				848A33A9297611D3008D9957 /* Matched Cards Game */,
 				3F0D6B9229747AA000F6B9A0 /* Login and SingUp View */,
@@ -325,6 +328,7 @@
 				3F0D6B9829747DF500F6B9A0 /* Users.swift in Sources */,
 				3F3A76BA2972E55D002E0BB1 /* ContentView.swift in Sources */,
 				E4DCF51029767D8600FF02C8 /* PuzzleModel.swift in Sources */,
+				AF80AC9829789CE400F7279B /* Wordle.swift in Sources */,
 				848A33AB2976120A008D9957 /* Memory.swift in Sources */,
 				848A33A12975B8A6008D9957 /* snake.swift in Sources */,
 				AF3C0CC4297736C800E742CF /* XO.swift in Sources */,

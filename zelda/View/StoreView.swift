@@ -340,6 +340,10 @@ struct Player : Identifiable {
 }
 var data = [Player(id: 0, power: [0.2,0.5,0.9], image: "1", name: "Sherman", color: .clear, price: 0, description: "you already have it"),
             Player(id: 1, power: [0.3,0.5,0.6], image: "luca", name: "Luca", color: .clear, price: 800, description: "buy"),
-            Player(id: 2, power: [0.7,0.5,1], image: "marty", name: "Marty", color: .clear, price: 1000, description: "buy")
+            Player(id: 2, power: [0.7,0.5,1], image: "marty", name: "Marty", color: .clear, price: 1000, description: "buy"),
+            Player(id: 3, power: [0.8,0.2,1], image: "Leah", name: "Leah", color: .clear, price: 3000, description: "buy"),
+            Player(id: 4, power: [1,1,1], image: "zelda2", name: "Zelda", color: .clear, price: 5000, description: "buy"),
+            Player(id: 5, power: [1,0.3,1], image: "Anderson", name: "Anderson", color: .clear, price: 3500, description: "buy"),
+
 ]
 

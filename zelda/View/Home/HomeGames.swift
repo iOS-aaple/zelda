@@ -210,6 +210,7 @@ struct UniverseMemory : View {
 }
 
 struct Ludo : View {
+    @State private var presentAlert = false
     var body: some View {
         HStack {
             HStack{
@@ -221,10 +222,10 @@ struct Ludo : View {
                 Spacer()
             } .padding(.leading, 20)
             
-            Text(" You need 3000 Jewerly to unlock")
+            Text("Ludo Star")
                 .foregroundColor(Color.gray)
                 .multilineTextAlignment(.center)
-                .font(.system(size: 15, design: .monospaced))
+                .font(.system(size: 25, design: .monospaced))
                 .frame(maxWidth: 200)
                 .padding(.horizontal)
                 .shadow(color: Color.black.opacity(1), radius: 8, x: 2, y: 6)
@@ -232,7 +233,10 @@ struct Ludo : View {
             VStack(spacing: 20){
                 Spacer(minLength: 0)
                 HStack{
-                    Button(action:{} , label: {
+                    
+                    Button(action:{
+                        presentAlert = true
+                    } , label: {
                         Text("Play")
                            .font(.caption)
                            .foregroundColor(Color.gray)
@@ -240,6 +244,12 @@ struct Ludo : View {
                            .padding(.horizontal, 25)
                            .background(Capsule().stroke(Color.gray, lineWidth: 2))
 
+                    })
+                    .alert("You need 3000 Jewerly to unlock", isPresented: $presentAlert, actions: {
+                        
+                        Button("oK", role: .cancel, action: {})
+                    }, message: {
+                        Text("")
                     })
                         .offset(x: -20, y: -50)
                 }
@@ -263,6 +273,7 @@ struct Ludo : View {
     
 }
 struct chess : View {
+    @State private var presentAlert = false
     var body: some View {
         HStack {
             HStack{
@@ -274,10 +285,10 @@ struct chess : View {
                 Spacer()
             } .padding(.leading, 20)
             
-            Text(" You need 5000 Jewerly to unlock")
+            Text("Chess")
                 .foregroundColor(Color.gray)
                 .multilineTextAlignment(.center)
-                .font(.system(size: 15, design: .monospaced))
+                .font(.system(size: 25, design: .monospaced))
                 .frame(maxWidth: 200)
                 .padding(.horizontal)
                 .shadow(color: Color.black.opacity(1), radius: 8, x: 2, y: 6)
@@ -285,7 +296,9 @@ struct chess : View {
             VStack(spacing: 20){
                 Spacer(minLength: 0)
                 HStack{
-                    Button(action:{} , label: {
+                    Button(action:{
+                        presentAlert = true
+                    } , label: {
                         Text("Play")
                            .font(.caption)
                            .foregroundColor(Color.gray)
@@ -293,6 +306,12 @@ struct chess : View {
                            .padding(.horizontal, 25)
                            .background(Capsule().stroke(Color.gray, lineWidth: 2))
 
+                    })
+                    .alert("You need 5000 Jewerly to unlock", isPresented: $presentAlert, actions: {
+                        
+                        Button("oK", role: .cancel, action: {})
+                    }, message: {
+                        Text("")
                     })
                         .offset(x: -20, y: -50)
                 }

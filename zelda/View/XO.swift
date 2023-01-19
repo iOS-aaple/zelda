@@ -60,24 +60,24 @@ struct Moves : View {
                         .aspectRatio(geometry.size, contentMode: .fill)
                         .edgesIgnoringSafeArea(.all)
                     VStack{
-                        HStack {
-                            Button(action : {
-                                
-                            }) {
-                                Image("red")
-                                    .resizable()
-                                    .font(.title)
-                                    .foregroundColor(.white)
-                                    .frame(width: 30, height: 30)
-                                
-                            }
-                            Text("100")
-                                .foregroundColor(Color(red: 0.01332890149, green: 0.04810451716, blue:  0.1187042817))
-                        }
-                        .padding(.trailing)
-                        .background(Color(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393))
-                        .cornerRadius(10)
-                        .padding(.leading, 270)
+//                        HStack {
+//                            Button(action : {
+//                                
+//                            }) {
+//                                Image("red")
+//                                    .resizable()
+//                                    .font(.title)
+//                                    .foregroundColor(.white)
+//                                    .frame(width: 30, height: 30)
+//                                
+//                            }
+//                            Text("100")
+//                                .foregroundColor(Color(red: 0.01332890149, green: 0.04810451716, blue:  0.1187042817))
+//                        }
+//                        .padding(.trailing)
+//                        .background(Color(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393))
+//                        .cornerRadius(10)
+//                        .padding(.leading, 270)
                         Text("")
                             /*.alert(endGame, isPresented: $gameEnded){
                                 Button( "Reset", role: .destructive, action: resetGame)
